@@ -1,0 +1,15 @@
+D:\github\webdev\pretpark\bin\Debug\net6.0\pretpark.exe
+D:\github\webdev\pretpark\bin\Debug\net6.0\pretpark.deps.json
+D:\github\webdev\pretpark\bin\Debug\net6.0\pretpark.runtimeconfig.json
+D:\github\webdev\pretpark\bin\Debug\net6.0\pretpark.dll
+D:\github\webdev\pretpark\bin\Debug\net6.0\pretpark.pdb
+D:\github\webdev\pretpark\obj\Debug\net6.0\pretpark.csproj.AssemblyReference.cache
+D:\github\webdev\pretpark\obj\Debug\net6.0\pretpark.GeneratedMSBuildEditorConfig.editorconfig
+D:\github\webdev\pretpark\obj\Debug\net6.0\pretpark.AssemblyInfoInputs.cache
+D:\github\webdev\pretpark\obj\Debug\net6.0\pretpark.AssemblyInfo.cs
+D:\github\webdev\pretpark\obj\Debug\net6.0\pretpark.csproj.CoreCompileInputs.cache
+D:\github\webdev\pretpark\obj\Debug\net6.0\pretpark.dll
+D:\github\webdev\pretpark\obj\Debug\net6.0\refint\pretpark.dll
+D:\github\webdev\pretpark\obj\Debug\net6.0\pretpark.pdb
+D:\github\webdev\pretpark\obj\Debug\net6.0\pretpark.genruntimeconfig.cache
+D:\github\webdev\pretpark\obj\Debug\net6.0\ref\pretpark.dll
