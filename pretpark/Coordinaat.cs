@@ -9,8 +9,13 @@ public struct Coordinaat
         y = _y;
     }
 
-    public Coordinaat operator+(Coordinaat c, Coordinaat x)
+    public static Coordinaat operator+(Coordinaat a, Coordinaat b)
     {
-        return c;
+        return new Coordinaat((a.x + b.x), (a.y + b.y));
+    }
+
+    public static Coordinaat operator-(Coordinaat a, Coordinaat b)
+    {
+        return new Coordinaat((a.x - b.x), (a.y - b.y));
     }
 }

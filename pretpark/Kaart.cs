@@ -3,8 +3,8 @@ public class Kaart : Tekener
 {
     public readonly int Breedte;
     public readonly int Hoogte;
-    public readonly IList<T> Items = new List<T>();
-    public readonly IList<T> Paden = new List<T>();
+    public List<KaartItem> Items = new List<KaartItem>();
+    public List<Pad> Paden = new List<Pad>();
 
     public Kaart(int _Breedte, int _Hoogte)
     {
@@ -17,13 +17,13 @@ public class Kaart : Tekener
         
     }
 
-    public void VoegItemToe(/*KaartItem item*/)
+    public void VoegItemToe(KaartItem item)
     {
-
+        Items.Add(item);
     }
 
-    public void VoegPadToe(/*Pad pad*/)
+    public void VoegPadToe(Pad pad)
     {
-
+        Paden.Add(pad);
     }
 }
