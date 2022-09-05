@@ -13,6 +13,6 @@ public class KaartItem : Tekenbaar
 
     public void TekenConsole(ConsoleTekener t)
     {
-
+        // write character
     }
 }

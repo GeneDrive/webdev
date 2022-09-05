@@ -1,5 +1,5 @@
 using static Tekenbaar;
-class Pad : Tekenbaar
+public class Pad : Tekenbaar
 {
     private float? _lengteBerekend;
     private float? lengteBerekend {
@@ -55,6 +55,6 @@ class Pad : Tekenbaar
 
     public void TekenConsole(ConsoleTekener t)
     {
-
+        // zet hier de complece teken
     }
 }
