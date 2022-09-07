@@ -1,4 +1,8 @@
-public interface Tekener
+namespace Kaart
 {
-    public void Teken(Tekener t);
+    public interface Tekener
+    {
+        public void Teken(Tekener t);
+    }
 }
+

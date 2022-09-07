@@ -1,60 +1,24 @@
-using static Tekenbaar;
-public class Pad : Tekenbaar
+namespace Kaart
 {
-    private float? _lengteBerekend;
-    private float? lengteBerekend {
-        get
-        {
-            return _lengteBerekend;
-        }
-        set
-        {
-            _lengteBerekend = value;
-        }
-    }
-    private Coordinaat _van;
-    public Coordinaat van{
-        get
-        {
-            return _van;
-        }
-        set
-        {
-            if(value.x < 0 || value.y < 0)
-                throw new Exception("de waardes mogen niet negatief zijn");
-
-            lengteBerekend = null;
-            _van = value;
-        }
-    }
-
-    private Coordinaat _naar;
-    public Coordinaat naar{
-        get
-        {
-            return _naar;
-        }
-        set
-        {
-            if(value.x < 0 || value.y < 0)
-                throw new Exception("de waardes mogen niet negatief zijn");
-
-            lengteBerekend = null;
-            _naar = value;
-        }
-    }
-
-    public float Lengte()
+    public class Pad : Tekenbaar
     {
-        var hoogte = naar.y - van.y;
-        var lengte = naar.x - van.x;
-        var afstand = Math.Sqrt(Math.Pow(hoogte, 2) + Math.Pow(lengte, 2));
-
-        return (float) afstand;
-    }
-
-    public void TekenConsole(ConsoleTekener t)
-    {
-        // zet hier de complece teken
+        public Coordinaat van { get; set; }
+        public Coordinaat naar { get; set; }
+        private float? lengteBerekend;
+        public float Lengte()
+        {
+            if (!lengteBerekend.HasValue)
+                lengteBerekend = (float)Math.Sqrt((van.x - naar.x) * (van.x - naar.x) + (van.y - naar.y) * (van.y - naar.y));
+            return lengteBerekend.Value;
+        }
+        public void TekenConsole(ConsoleTekener t)
+        {
+            for (int i = 0; i < (int)Lengte(); i++)
+            {
+                float factor = i / Lengte();
+                t.SchrijfOp(new Coordinaat((int)Math.Round(van.x + (naar.x - van.x) * factor), (int)Math.Round(van.y + (naar.y - van.y) * factor)), "#");
+            }
+            t.SchrijfOp(new Coordinaat((int)Math.Round(van.x + (naar.x - van.x) * .5), (int)Math.Round(van.y + (naar.y - van.y) * .5)), (1000 * Lengte()).metSuffixen());
+        }
     }
 }

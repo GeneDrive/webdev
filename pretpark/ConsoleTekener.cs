@@ -1,10 +1,18 @@
-using static Tekener;
-public class ConsoleTekener : Tekener
+namespace Kaart
 {
-    public void Teken(Tekener t)
+    public class ConsoleTekener : Tekener
     {
-        System.Console.WriteLine("+");
-    }
+        public void Teken(Tekener t)
+        {
+            System.Console.WriteLine("#");
+        }
 
-    //public void schrijfop
+        public void SchrijfOp(Coordinaat Positie, string Text) 
+        {
+            if (Positie.x < 0 || Positie.y < 0)
+                throw new Exception("Kan niet tekenen in het negatieve!");
+            Console.SetCursorPosition(Positie.x, Positie.y);
+            Console.WriteLine(Text);
+        }
+    }
 }

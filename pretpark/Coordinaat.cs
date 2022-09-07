@@ -1,21 +1,24 @@
-public struct Coordinaat
+namespace Kaart
 {
-    public readonly int x;
-    public readonly int y;
-
-    public Coordinaat(int _x, int _y)
+    public struct Coordinaat
     {
-        x = _x;
-        y = _y;
-    }
+        public readonly int x;
+        public readonly int y;
 
-    public static Coordinaat operator+(Coordinaat a, Coordinaat b)
-    {
-        return new Coordinaat((a.x + b.x), (a.y + b.y));
-    }
+        public Coordinaat(int _x, int _y)
+        {
+            x = _x;
+            y = _y;
+        }
 
-    public static Coordinaat operator-(Coordinaat a, Coordinaat b)
-    {
-        return new Coordinaat((a.x - b.x), (a.y - b.y));
+        public static Coordinaat operator+(Coordinaat a, Coordinaat b)
+        {
+            return new Coordinaat((a.x + b.x), (a.y + b.y));
+        }
+
+        public static Coordinaat operator-(Coordinaat a, Coordinaat b)
+        {
+            return new Coordinaat((a.x - b.x), (a.y - b.y));
+        }
     }
 }

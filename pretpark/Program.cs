@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MainProgram
+namespace Kaart
 {
     class Starter
     {
@@ -18,10 +18,10 @@ namespace MainProgram
             p2.van = new Coordinaat(26, 4);
             p2.naar = new Coordinaat(10, 5);
             k.VoegPadToe(p2);
-            k.VoegItemToe(new Attractie(k, new Coordinaat(15, 15)));
-            k.VoegItemToe(new Attractie(k, new Coordinaat(20, 15)));
-            k.VoegItemToe(new Attractie(k, new Coordinaat(5, 18)));
-            k.TekenConsole(new ConsoleTekener());
+            k.VoegItemToe(new Attractie(k, new Coordinaat(15, 15), "reuzenrad"));
+            k.VoegItemToe(new Attractie(k, new Coordinaat(20, 15), "Achtbaan 1"));
+            k.VoegItemToe(new Attractie(k, new Coordinaat(5, 18), "Achtbaan 2"));
+            k.Teken(new ConsoleTekener());
             new ConsoleTekener().SchrijfOp(new Coordinaat(0, k.Hoogte + 1), "Deze kaart is schaal 1:1000");
             System.Console.Read();
         }
