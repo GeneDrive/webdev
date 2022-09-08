@@ -1,6 +1,6 @@
 namespace Kaart
 {
-    class Attractie : KaartItem
+    public class Attractie : KaartItem
     {
         private Coordinaat _locatie{get; set;}
         private Kaart kaart;
