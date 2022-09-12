@@ -9,16 +9,9 @@ namespace Kaart
         private int _angstLevel{get; set;}
         private string _naam{get; set;}
 
-        public Attractie(Kaart kaart, Coordinaat _locatie, string naam)
+        public Attractie(Kaart kaart, Coordinaat _locatie, string naam) : base(kaart, _locatie)
         {
-            this._locatie = _locatie;
-            this.kaart = kaart;
-            this._naam = naam;
-        }
-
-        public void TekenConsole(ConsoleTekener t)
-        {
-            System.Console.WriteLine(Karakter);
+          
         }
     }
 }

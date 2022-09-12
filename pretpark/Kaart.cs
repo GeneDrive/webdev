@@ -1,6 +1,6 @@
 namespace Kaart
 {
-    public class Kaart : Tekener
+    public class Kaart
     {
         public readonly int Breedte;
         public readonly int Hoogte;
@@ -15,7 +15,9 @@ namespace Kaart
 
         public void Teken(Tekener t)
         {
-            System.Console.WriteLine("#");
+            foreach(Pad pad in Paden) {
+                t.Teken(pad);
+            }
         }
 
         public void VoegItemToe(KaartItem item)
