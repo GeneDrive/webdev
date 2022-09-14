@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\github\\webdev\\Opdract2\\Opdract2.csproj": {}
+    "D:\\GitHub\\webdev\\Opdract2\\Opdract2.csproj": {}
   },
   "projects": {
-    "D:\\github\\webdev\\Opdract2\\Opdract2.csproj": {
+    "D:\\GitHub\\webdev\\Opdract2\\Opdract2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\webdev\\Opdract2\\Opdract2.csproj",
+        "projectUniqueName": "D:\\GitHub\\webdev\\Opdract2\\Opdract2.csproj",
         "projectName": "Opdract2",
-        "projectPath": "D:\\github\\webdev\\Opdract2\\Opdract2.csproj",
+        "projectPath": "D:\\GitHub\\webdev\\Opdract2\\Opdract2.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\webdev\\Opdract2\\obj\\",
+        "outputPath": "D:\\GitHub\\webdev\\Opdract2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

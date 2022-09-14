@@ -1,0 +1,5 @@
+D:\GitHub\webdev\Opdract2\obj\Debug\net6.0\Opdract2.csproj.AssemblyReference.cache
+D:\GitHub\webdev\Opdract2\obj\Debug\net6.0\Opdract2.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\webdev\Opdract2\obj\Debug\net6.0\Opdract2.AssemblyInfoInputs.cache
+D:\GitHub\webdev\Opdract2\obj\Debug\net6.0\Opdract2.AssemblyInfo.cs
+D:\GitHub\webdev\Opdract2\obj\Debug\net6.0\Opdract2.csproj.CoreCompileInputs.cache
