@@ -14,7 +14,7 @@ namespace Kaart
 
         public void TekenConsole(ConsoleTekener t)
         {
-            System.Console.WriteLine(Karakter);
+            t.Teken(this);
         }
     }
 }

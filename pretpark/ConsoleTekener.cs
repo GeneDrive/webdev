@@ -2,9 +2,9 @@ namespace Kaart
 {
     public class ConsoleTekener : Tekener
     {
-        public void Teken(Tekener t)
+        public void Teken(Tekenbaar t)
         {
-            System.Console.WriteLine("#");
+            t.TekenConsole(this);
         }
 
         public void SchrijfOp(Coordinaat Positie, string Text) 
