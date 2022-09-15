@@ -1,6 +1,6 @@
 namespace Authenticatie
 {
-    class GebruikerContext
+    class GebruikerContext : IGebruikerContext
     {
         private List<Gebruiker> gebruikers = new List<Gebruiker>();
 
@@ -14,9 +14,20 @@ namespace Authenticatie
             return gebruikers[i];
         }
 
-        public void NieuweGebruiker(string wachtwoord, string email)
+        public Gebruiker NieuweGebruiker(string wachtwoord, string email)
         {
-            gebruikers.Add(new Gebruiker(wachtwoord, email));
+            for(int i = 0; i < AantalGebruikers(); i++)
+            {
+                if(GetGebruiker(i).Email == email)
+                {
+                    System.Console.WriteLine("Deze gebruiker bestaat al!");
+                    return null;
+                }
+            }
+            Gebruiker user = new Gebruiker(email, wachtwoord);
+            gebruikers.Add(user);
+
+            return user;
         }
     }
 }

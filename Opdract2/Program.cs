@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 namespace Authenticatie
 {
     public class main{
-        GebruikerService gebruikerService = new GebruikerService();
+        private static GebruikerService _gebruikerService = new GebruikerService();
         static void Main(string[] args)
         {
-            startLoop();
+            startLoop(_gebruikerService);
         }
 
-        private static void startLoop()
+        private static void startLoop(GebruikerService gebruikerService)
         {
             System.Console.WriteLine("Welkom,");
             System.Console.WriteLine("vul de optie in die u wilt kiezen:");
@@ -21,10 +21,10 @@ namespace Authenticatie
             System.Console.WriteLine("3. verifieer");
 
             string input = Console.ReadLine();
-            System.Console.WriteLine(input);
+            checkInput(input, gebruikerService);
         }
 
-        void checkInput(string input)
+        private static void checkInput(string input, GebruikerService gebruikerService)
         {
             ////////////////////////////////////////////////////////////////
             //
@@ -37,28 +37,28 @@ namespace Authenticatie
             ////////////////////////////////////////////////////////////////
             if(input == "1")
             {
-                startLogin();
+                startLogin(gebruikerService);
             } 
             else if(input == "2") 
             {
-                startRegistreer();
+                startRegistreer(gebruikerService);
             }
             else if (input == "3")
             {
-                startVerificatie();
+                startVerificatie(gebruikerService);
             }
             else
             {
                 System.Console.WriteLine("geen geldige optie gekozen, Probeer het opnieuw.");
-                startLoop();
+                startLoop(gebruikerService);
             }
         }
 
-        void startLogin()
+        private static void startLogin(GebruikerService gebruikerService)
         {
             System.Console.WriteLine("Inloggen");
             System.Console.WriteLine("Voer uw E-mail in:");
-            string mail = Console.ReadLine();
+            string email = Console.ReadLine();
 
             System.Console.WriteLine("Voer uw wachtwoord in:");
             string wachtwoord = Console.ReadLine();
@@ -72,15 +72,15 @@ namespace Authenticatie
                 System.Console.WriteLine("Inloggen gefaald");
                 System.Console.WriteLine("probeer het later opnieuw.");
 
-                startLoop();
+                startLoop(gebruikerService);
             }
         }
 
-        void startRegistreer()
+        private static void startRegistreer(GebruikerService gebruikerService)
         {
-            System.Console.WriteLine("Inloggen");
+            System.Console.WriteLine("Registratie");
             System.Console.WriteLine("Voer uw E-mail in:");
-            string mail = Console.ReadLine();
+            string email = Console.ReadLine();
 
             System.Console.WriteLine("Voer uw wachtwoord in:");
             string wachtwoord = Console.ReadLine();
@@ -89,33 +89,22 @@ namespace Authenticatie
             {
                 System.Console.WriteLine("succesvol geregistreerd");
 
-                ////////////////////////////////////////////////////////////////
-                //
-                //
-                //
-                // stuur verificatie email
-                // doe de check anders
-                //
-                //
-                //
-                ////////////////////////////////////////////////////////////////
-
-                startLoop();
+                startLoop(gebruikerService);
             }
             else
             {
                 System.Console.WriteLine("Registreren gefaald");
                 System.Console.WriteLine("probeer het later opnieuw.");
 
-                startLoop();
+                startLoop(gebruikerService);
             }
         }
 
-        void startVerificatie()
+        private static void startVerificatie(GebruikerService gebruikerService)
         {
             System.Console.WriteLine("Verificatie");
             System.Console.WriteLine("Voer uw E-mail in:");
-            string mail = Console.ReadLine();
+            string email = Console.ReadLine();
 
             System.Console.WriteLine("Voer de opgestuurde code in:");
             string token = Console.ReadLine();
@@ -125,14 +114,14 @@ namespace Authenticatie
                 System.Console.WriteLine("succesvol geverifieert");
                 System.Console.WriteLine("U kunt nu inloggen met uw account");
 
-                startLoop();
+                startLoop(gebruikerService);
             }
             else
             {
                 System.Console.WriteLine("Registreren gefaald");
                 System.Console.WriteLine("probeer het later opnieuw.");
 
-                startLoop();
+                startLoop(gebruikerService);
             }
         }
     }
