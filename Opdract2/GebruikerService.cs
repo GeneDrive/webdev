@@ -1,10 +1,16 @@
 namespace Authenticatie
 {
-    class GebruikerService
+    public class GebruikerService
     {
-        public IGebruikerContext gebruikerContext = new GebruikerContext();
-        public IMailservice emailService = new EmailService();
+        public IGebruikerContext gebruikerContext;
+        public IMailservice emailService;
 
+        public GebruikerService(IGebruikerContext _gebruikerContext, IMailservice _emailService)
+        {
+            gebruikerContext = _gebruikerContext;
+            emailService = _emailService;
+        }
+        
         public Gebruiker Registreer(string email, string wachtwoord)
         {
             Gebruiker tempUser = gebruikerContext.NieuweGebruiker(wachtwoord, email);

@@ -1,6 +1,6 @@
 namespace Authenticatie
 {
-    class GebruikerContext : IGebruikerContext
+    public class GebruikerContext : IGebruikerContext
     {
         private List<Gebruiker> gebruikers = new List<Gebruiker>();
 

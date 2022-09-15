@@ -1,6 +1,6 @@
 namespace Authenticatie
 {
-    class EmailService : IMailservice
+    public class EmailService : IMailservice
     {
         public bool Email(string tekst, string naarAdres, string token)
         {

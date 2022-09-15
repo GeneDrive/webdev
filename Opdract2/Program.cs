@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Authenticatie
 {
     public class main{
-        private static GebruikerService _gebruikerService = new GebruikerService();
+        private static GebruikerService _gebruikerService = new GebruikerService(new GebruikerContext(), new EmailService()));
         static void Main(string[] args)
         {
             startLoop(_gebruikerService);

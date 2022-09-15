@@ -1,6 +1,6 @@
 namespace Authenticatie
 {
-    interface IGebruikerContext
+    public interface IGebruikerContext
     {
         public int AantalGebruikers();
         public Gebruiker GetGebruiker(int i);
