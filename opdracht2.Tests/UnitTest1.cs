@@ -1,36 +1,43 @@
 using Authenticatie;
+using Xunit;
 
 namespace Authenticatie.Tests;
 
 public class UnitTest1
 {
-    [Fact]
-    public void Test1()
-    {
-       // arrange
+   [Fact]
+   public void GebruikerContext_wordElkeGebruikerGecheckedOfZeAllBestaam()
+   {
+      // arrange
+      GebruikerContextMock gebruikerContext = new GebruikerContextMock();
+      int expectedResult = gebruikerContext.AantalGebruikers();
+      int actualResult = 0;
 
-       // act
+      // act
+      gebruikerContext.NieuweGebruiker("martijn@hotmail.com", "massfgweaefg");
+      actualResult = gebruikerContext.aantalLoops;
+      
+      // assert
+      Assert.Equal(expectedResult, actualResult);
+   }
 
-       // assert
-    }
+   [Fact]
+   public void Test1()
+   {
+      // arrange
 
-    [Fact]
-    public void Test1()
-    {
-       // arrange
+      // act
 
-       // act
+      // assert
+   }
 
-       // assert
-    }
+   [Fact]
+   public void Test1()
+   {
+      // arrange
 
-    [Fact]
-    public void Test1()
-    {
-       // arrange
+      // act
 
-       // act
-
-       // assert
-    }
+      // assert
+   }
 }
