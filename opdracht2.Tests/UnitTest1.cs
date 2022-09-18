@@ -22,13 +22,19 @@ public class UnitTest1
    }
 
    [Fact]
-   public void Test1()
+   public void GebruikerContext_wordUserNietToegevoegdAlsHijAlBestaat()
    {
       // arrange
+      GebruikerContextMock gebruikerContext = new GebruikerContextMock();
+      bool expectedResult = false;
+      bool actualResult;
 
       // act
+      gebruikerContext.NieuweGebruiker("man@hotmail.com", "rgaewrgf");
+      actualResult = gebruikerContext.userWasAdded;
 
       // assert
+      Assert.Equal(expectedResult, actualResult);
    }
 
    [Fact]

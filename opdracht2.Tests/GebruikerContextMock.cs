@@ -16,6 +16,7 @@ namespace Authenticatie
         }
 
         public int aantalLoops = 0;
+        public bool userWasAdded = false;
         public Gebruiker NieuweGebruiker(string wachtwoord, string email)
         {
             aantalLoops = 0;
@@ -30,6 +31,8 @@ namespace Authenticatie
             }
             Gebruiker user = new Gebruiker(email, wachtwoord);
             gebruikers.Add(user);
+
+            userWasAdded = true;
 
             return user;
         }
