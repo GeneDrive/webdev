@@ -15,7 +15,7 @@ namespace Kaart
 
         public void Teken(Tekener t)
         {
-            foreach(Pad pad in Paden) {
+            foreach(var pad in Paden) {
                 t.Teken(pad);
             }
         }
