@@ -1,5 +1,6 @@
 using Authenticatie;
 using Xunit;
+using Moq;
 
 namespace Authenticatie.Tests;
 
@@ -20,7 +21,7 @@ public class UnitTest1
    public void GebruikerContext_wordElkeGebruikerGecheckedOfZeAllBestaam()
    {
       // arrange
-      GebruikerContextMock gebruikerContext = new GebruikerContextMock();
+      Mock<IGebruikerContext> gebruikerContext = new M;
       int expectedResult = gebruikerContext.AantalGebruikers();
       int actualResult = 0;
 

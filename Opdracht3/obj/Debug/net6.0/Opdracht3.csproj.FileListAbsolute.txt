@@ -1,0 +1,15 @@
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\Opdracht3.csproj.AssemblyReference.cache
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\Opdracht3.GeneratedMSBuildEditorConfig.editorconfig
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\Opdracht3.AssemblyInfoInputs.cache
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\Opdracht3.AssemblyInfo.cs
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\Opdracht3.csproj.CoreCompileInputs.cache
+D:\github\webdev\Opdracht3\bin\Debug\net6.0\Opdracht3.exe
+D:\github\webdev\Opdracht3\bin\Debug\net6.0\Opdracht3.deps.json
+D:\github\webdev\Opdracht3\bin\Debug\net6.0\Opdracht3.runtimeconfig.json
+D:\github\webdev\Opdracht3\bin\Debug\net6.0\Opdracht3.dll
+D:\github\webdev\Opdracht3\bin\Debug\net6.0\Opdracht3.pdb
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\Opdracht3.dll
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\refint\Opdracht3.dll
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\Opdracht3.pdb
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\Opdracht3.genruntimeconfig.cache
+D:\github\webdev\Opdracht3\obj\Debug\net6.0\ref\Opdracht3.dll
