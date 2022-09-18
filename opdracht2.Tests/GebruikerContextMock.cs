@@ -4,37 +4,51 @@ namespace Authenticatie
 {
     public class GebruikerContextMock : IGebruikerContext
     {
-        private List<Gebruiker> gebruikers = new List<Gebruiker>(new Gebruiker("man@hotmail.com", "rgaewrgf"), new Gebruiker("reeeee@hotmail.com", "rgaewrgf"), new Gebruiker("hans@hotmail.com", "rgaewrgf"));
+        private List<IGebruiker> gebruikers = new List<IGebruiker>();
 
+        public GebruikerContextMock()
+        {
+            gebruikers.Add(new Gebruiker("man@hotmail.com", "rgaewrgf"));
+            gebruikers.Add(new Gebruiker("reeeee@hotmail.com", "rgaewrgf"));
+        }
         public int AantalGebruikers()
         {
             return gebruikers.Count;
         }
-        public Gebruiker GetGebruiker(int i)
+        public IGebruiker GetGebruiker(int i)
         {
             return gebruikers[i];
         }
 
         public int aantalLoops = 0;
         public bool userWasAdded = false;
-        public Gebruiker NieuweGebruiker(string wachtwoord, string email)
+        public IGebruiker NieuweGebruiker(string wachtwoord, string email)
         {
+            userWasAdded = false;
             aantalLoops = 0;
+            bool exists = false;
             for(int i = 0; i < AantalGebruikers(); i++)
             {
                 aantalLoops++;
                 if(GetGebruiker(i).Email == email)
                 {
                     System.Console.WriteLine("Deze gebruiker bestaat al!");
-                    return null;
+                    exists = true;
                 }
             }
-            Gebruiker user = new Gebruiker(email, wachtwoord);
-            gebruikers.Add(user);
 
-            userWasAdded = true;
-
-            return user;
+            if(!exists)
+            {
+                IGebruiker user = new GebruikerMock(email, wachtwoord);
+                gebruikers.Add(user);
+                
+                userWasAdded = true;
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

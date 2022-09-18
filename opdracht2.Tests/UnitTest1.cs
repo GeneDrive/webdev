@@ -5,6 +5,17 @@ namespace Authenticatie.Tests;
 
 public class UnitTest1
 {
+   /////////////////////////////////////////////////////////////
+   //
+   // Vraag
+   //
+   //
+   // wat word er bedoelt met:
+   // Schrijf ook tests waarin je controleert of methoden op de mocks met de juiste parameter zijn aangeroepen.
+   //
+   //
+   //
+   //////////////////////////////////////////////////////////////
    [Fact]
    public void GebruikerContext_wordElkeGebruikerGecheckedOfZeAllBestaam()
    {
@@ -27,10 +38,11 @@ public class UnitTest1
       // arrange
       GebruikerContextMock gebruikerContext = new GebruikerContextMock();
       bool expectedResult = false;
-      bool actualResult;
+      bool actualResult = false;
 
       // act
-      gebruikerContext.NieuweGebruiker("man@hotmail.com", "rgaewrgf");
+      gebruikerContext.NieuweGebruiker("hans@hotmail.com", "rgaewrgf");
+      gebruikerContext.NieuweGebruiker("hans@hotmail.com", "rgaewrgf");
       actualResult = gebruikerContext.userWasAdded;
 
       // assert
@@ -38,12 +50,19 @@ public class UnitTest1
    }
 
    [Fact]
-   public void Test1()
+   public void GebruikerService_verifieerNietAlsTokenIsVerlopen()
    {
       // arrange
+      GebruikerContextMock gebruikerContext = new GebruikerContextMock();
+      GebruikerService gebruikerService = new GebruikerService(gebruikerContext, new EmailService());
+      bool expectedResult = false;
+      bool actualResult;
 
       // act
+      gebruikerService.Registreer("miranda@hotmail.com" , "egfiwygfeiwyagfwiyfrgiwqyegfiwyegfiy");
+      actualResult = gebruikerService.Verifieer("miranda@hotmail.com", "sasgsd12345");
 
       // assert
+      Assert.Equal(expectedResult, actualResult);
    }
 }

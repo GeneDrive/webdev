@@ -1,10 +1,10 @@
 namespace Authenticatie
 {
-    public class Gebruiker
+    public class Gebruiker : IGebruiker
     {
         public string Wachtwoord {get;set;}
         public string Email {get;set;}
-        public VerificatieToken verificatieToken {get;}
+        public IVerificatieToken verificatieToken {get;}
 
         public Gebruiker(string email, string wachtwoord)
         {

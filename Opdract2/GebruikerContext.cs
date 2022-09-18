@@ -2,32 +2,41 @@ namespace Authenticatie
 {
     public class GebruikerContext : IGebruikerContext
     {
-        private List<Gebruiker> gebruikers = new List<Gebruiker>();
+        private List<IGebruiker> gebruikers = new List<IGebruiker>();
 
         public int AantalGebruikers()
         {
             return gebruikers.Count;
         }
 
-        public Gebruiker GetGebruiker(int i)
+        public IGebruiker GetGebruiker(int i)
         {
             return gebruikers[i];
         }
 
-        public Gebruiker NieuweGebruiker(string wachtwoord, string email)
+        public IGebruiker NieuweGebruiker(string wachtwoord, string email)
         {
+            bool exists = false;
             for(int i = 0; i < AantalGebruikers(); i++)
             {
                 if(GetGebruiker(i).Email == email)
                 {
                     System.Console.WriteLine("Deze gebruiker bestaat al!");
-                    return null;
+                    exists = true;
                 }
             }
-            Gebruiker user = new Gebruiker(email, wachtwoord);
-            gebruikers.Add(user);
 
-            return user;
+            if(!exists)
+            {
+                IGebruiker user = new Gebruiker(email, wachtwoord);
+                gebruikers.Add(user);
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
     }
 }
