@@ -13,21 +13,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\github\\webdev\\pretpark\\pretpark.csproj",
+      "projectUniqueName": "D:\\GitHub\\webdev\\pretpark\\pretpark.csproj",
       "projectName": "pretpark",
-      "projectPath": "D:\\github\\webdev\\pretpark\\pretpark.csproj",
+      "projectPath": "D:\\GitHub\\webdev\\pretpark\\pretpark.csproj",
       "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "D:\\github\\webdev\\pretpark\\obj\\",
+      "outputPath": "D:\\GitHub\\webdev\\pretpark\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
