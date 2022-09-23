@@ -2,28 +2,30 @@ namespace Kaart
 {
     public class Pad : Tekenbaar
     {
+        private Coordinaat _van; 
         public Coordinaat van 
         { 
             get
             {
-                return van;
+                return _van;
             } 
             set
             {
                 lengteBerekend = null;
-                van = value;
+                _van = value;
             } 
         }
+        private Coordinaat _naar;
         public Coordinaat naar 
         {  
             get
             {
-                return naar;
+                return _naar;
             } 
             set
             {
                 lengteBerekend = null;
-                naar = value;
+                _naar = value;
             } 
         }
         private float? lengteBerekend;
