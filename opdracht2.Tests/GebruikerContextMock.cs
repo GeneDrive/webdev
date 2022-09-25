@@ -20,16 +20,13 @@ namespace Authenticatie
             return gebruikers[i];
         }
 
-        public int aantalLoops = 0;
         public bool userWasAdded = false;
-        public IGebruiker NieuweGebruiker(string wachtwoord, string email)
+        public IGebruiker NieuweGebruiker(string email, string wachtwoord)
         {
             userWasAdded = false;
-            aantalLoops = 0;
             bool exists = false;
             for(int i = 0; i < AantalGebruikers(); i++)
             {
-                aantalLoops++;
                 if(GetGebruiker(i).Email == email)
                 {
                     System.Console.WriteLine("Deze gebruiker bestaat al!");

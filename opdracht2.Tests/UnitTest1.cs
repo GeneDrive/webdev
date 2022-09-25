@@ -17,19 +17,19 @@ public class UnitTest1
    //
    //////////////////////////////////////////////////////////////
    [Fact]
-   public void GebruikerContext_wordElkeGebruikerGecheckedOfZeAllBestaam()
+   public void GebruikerContext_nieuweGebruikerMetJuisteMailWordGemaakt()
    {
       // arrange
       GebruikerContextMock gebruikerContext = new GebruikerContextMock();
-      int expectedResult = gebruikerContext.AantalGebruikers();
-      int actualResult = 0;
+      var mail = "gerda@gmail.com";
+      var wachtwoord = "welkom01!";
 
       // act
-      gebruikerContext.NieuweGebruiker("martijn@hotmail.com", "massfgweaefg");
-      actualResult = gebruikerContext.aantalLoops;
-      
+      gebruikerContext.NieuweGebruiker(mail, wachtwoord);
+      var actualResult = gebruikerContext.GetGebruiker(2);
+
       // assert
-      Assert.Equal(expectedResult, actualResult);
+      Assert.Equal(mail, actualResult.Email);
    }
 
    [Fact]

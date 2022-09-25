@@ -14,7 +14,7 @@ namespace Authenticatie
             return gebruikers[i];
         }
 
-        public IGebruiker NieuweGebruiker(string wachtwoord, string email)
+        public IGebruiker NieuweGebruiker(string email, string wachtwoord)
         {
             bool exists = false;
             for(int i = 0; i < AantalGebruikers(); i++)
