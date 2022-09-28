@@ -13,8 +13,22 @@ namespace Authenticatie
         
         public IGebruiker Registreer(string email, string wachtwoord)
         {
-            IGebruiker tempUser = gebruikerContext.NieuweGebruiker(wachtwoord, email);
+            bool exists = false;
+            IGebruiker tempUser = null;
 
+            for(int i = 0; i < gebruikerContext.AantalGebruikers(); i++)
+            {
+                if(gebruikerContext.GetGebruiker(i).Email == email)
+                {
+                    System.Console.WriteLine("Deze gebruiker bestaat al!");
+                    exists = true;
+                }
+            }
+            if(!exists)
+            {
+                tempUser = gebruikerContext.NieuweGebruiker(email, wachtwoord);
+            }
+            
             if(tempUser != null)
             {
                 emailService.Email("Deze email is voor uw verificatie. U moet u verifieren voordat u kan inloggen.", tempUser.Email, tempUser.verificatieToken.token);

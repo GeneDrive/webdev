@@ -5,45 +5,37 @@ namespace Authenticatie.Tests;
 
 public class UnitTest1
 {
-   /////////////////////////////////////////////////////////////
-   //
-   // Vraag
-   //
-   //
-   // wat word er bedoelt met:
-   // Schrijf ook tests waarin je controleert of methoden op de mocks met de juiste parameter zijn aangeroepen.
-   //
-   //
-   //
-   //////////////////////////////////////////////////////////////
    [Fact]
-   public void GebruikerContext_nieuweGebruikerMetJuisteMailWordGemaakt()
+   public void GebruikerService_nieuweGebruikerMetJuisteMailWordGemaakt()
    {
       // arrange
       GebruikerContextMock gebruikerContext = new GebruikerContextMock();
+      GebruikerService gebruikerService = new GebruikerService(gebruikerContext, new EmailService());
+
       var mail = "gerda@gmail.com";
       var wachtwoord = "welkom01!";
 
       // act
-      gebruikerContext.NieuweGebruiker(mail, wachtwoord);
-      var actualResult = gebruikerContext.GetGebruiker(2);
+      var actualResult = gebruikerService.Registreer(mail, wachtwoord);
 
       // assert
       Assert.Equal(mail, actualResult.Email);
    }
 
    [Fact]
-   public void GebruikerContext_wordUserNietToegevoegdAlsHijAlBestaat()
+   public void GebruikerService_wordnieuweGebruikerAangeroepenAlsHijAlBestaat()
    {
       // arrange
       GebruikerContextMock gebruikerContext = new GebruikerContextMock();
-      bool expectedResult = false;
-      bool actualResult = false;
+      GebruikerService gebruikerService = new GebruikerService(gebruikerContext, new EmailService());
+      
+      var mail = "man@hotmail.com";
+      var wachtwoord = "rgaewrgf";
+      IGebruiker expectedResult = null;
+      IGebruiker actualResult = null;
 
       // act
-      gebruikerContext.NieuweGebruiker("hans@hotmail.com", "rgaewrgf");
-      gebruikerContext.NieuweGebruiker("hans@hotmail.com", "rgaewrgf");
-      actualResult = gebruikerContext.userWasAdded;
+      actualResult = gebruikerService.Registreer(mail, wachtwoord);
 
       // assert
       Assert.Equal(expectedResult, actualResult);
