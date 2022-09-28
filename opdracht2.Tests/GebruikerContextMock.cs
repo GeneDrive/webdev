@@ -4,20 +4,20 @@ namespace Authenticatie
 {
     public class GebruikerContextMock : IGebruikerContext
     {
-        private List<IGebruiker> gebruikers = new List<IGebruiker>();
+        private List<Gebruiker> gebruikers = new List<Gebruiker>();
 
         public int AantalGebruikers()
         {
             return 1;
         }
-        public IGebruiker GetGebruiker(int i)
+        public Gebruiker GetGebruiker(int i)
         {
             return new Gebruiker("man@hotmail.com", "rgaewrgf");
         }
 
-        public IGebruiker NieuweGebruiker(string email, string wachtwoord)
+        public Gebruiker NieuweGebruiker(string email, string wachtwoord)
         {
-            return new GebruikerMock(email, wachtwoord);
+            return new Gebruiker(email, wachtwoord, -3);
         }
     }
 }

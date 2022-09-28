@@ -11,10 +11,10 @@ namespace Authenticatie
             emailService = _emailService;
         }
         
-        public IGebruiker Registreer(string email, string wachtwoord)
+        public Gebruiker Registreer(string email, string wachtwoord)
         {
             bool exists = false;
-            IGebruiker tempUser = null;
+            Gebruiker tempUser = null;
 
             for(int i = 0; i < gebruikerContext.AantalGebruikers(); i++)
             {
@@ -42,7 +42,7 @@ namespace Authenticatie
             bool succes = false;
             for(int i = 0; i < gebruikerContext.AantalGebruikers(); i++)
             {
-                IGebruiker tempGebruiker = gebruikerContext.GetGebruiker(i);
+                Gebruiker tempGebruiker = gebruikerContext.GetGebruiker(i);
 
                 if(tempGebruiker.Email == email)
                 {
@@ -74,7 +74,7 @@ namespace Authenticatie
 
             for(int i = 0; i < gebruikerContext.AantalGebruikers(); i++)
             {
-                IGebruiker tempGebruiker = gebruikerContext.GetGebruiker(i);
+                Gebruiker tempGebruiker = gebruikerContext.GetGebruiker(i);
 
                 if(tempGebruiker.Email == email)
                 {

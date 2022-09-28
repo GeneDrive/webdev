@@ -31,8 +31,8 @@ public class UnitTest1
       
       var mail = "man@hotmail.com";
       var wachtwoord = "rgaewrgf";
-      IGebruiker expectedResult = null;
-      IGebruiker actualResult = null;
+      Gebruiker expectedResult = null;
+      Gebruiker actualResult = null;
 
       // act
       actualResult = gebruikerService.Registreer(mail, wachtwoord);

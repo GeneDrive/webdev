@@ -4,7 +4,7 @@ namespace Authenticatie
     {
         //private List<Gebruiker> gebruikers;
         public int AantalGebruikers();
-        public IGebruiker GetGebruiker(int i);
-        public IGebruiker NieuweGebruiker(string email, string wachtwoord);
+        public Gebruiker GetGebruiker(int i);
+        public Gebruiker NieuweGebruiker(string email, string wachtwoord);
     }
 }
