@@ -17,7 +17,7 @@ namespace Authenticatie
 
         public IGebruiker NieuweGebruiker(string email, string wachtwoord)
         {
-            return new GebruikerMock(email, wachtwoord);
+            return new Gebruiker(email, wachtwoord);
         }
     }
 }

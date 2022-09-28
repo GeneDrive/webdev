@@ -6,11 +6,11 @@ namespace Authenticatie
         public string Email {get;set;}
         public IVerificatieToken verificatieToken {get;}
 
-        public Gebruiker(string email, string wachtwoord)
+        public Gebruiker(string email, string wachtwoord, int vervalDatum = 3)
         {
             this.Email = email;
             this.Wachtwoord = wachtwoord;
-            verificatieToken = new VerificatieToken();
+            verificatieToken = new VerificatieToken(vervalDatum);
         }
         public bool Geverifieerd() 
         {

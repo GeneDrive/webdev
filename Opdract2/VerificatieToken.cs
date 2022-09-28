@@ -2,7 +2,13 @@ namespace Authenticatie
 {
     public class VerificatieToken : IVerificatieToken
     {
-        public string token{get;set;} = "sasgsd12345";
-        public DateTime verloopDatum{get;set;} = DateTime.Today.AddDays(3);
+        public string token{get;set;}
+        public DateTime verloopDatum{get;set;}
+
+        public VerificatieToken(int _verloopDatum = 3, string _token = "sasgsd12345")
+        {
+            token = _token;
+            verloopDatum = DateTime.Today.AddDays(_verloopDatum);
+        }
     }
 }
