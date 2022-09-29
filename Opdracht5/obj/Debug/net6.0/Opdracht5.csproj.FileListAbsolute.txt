@@ -1,0 +1,15 @@
+D:\github\webdev\Opdracht5\bin\Debug\net6.0\Opdracht5.exe
+D:\github\webdev\Opdracht5\bin\Debug\net6.0\Opdracht5.deps.json
+D:\github\webdev\Opdracht5\bin\Debug\net6.0\Opdracht5.runtimeconfig.json
+D:\github\webdev\Opdracht5\bin\Debug\net6.0\Opdracht5.dll
+D:\github\webdev\Opdracht5\bin\Debug\net6.0\Opdracht5.pdb
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\Opdracht5.csproj.AssemblyReference.cache
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\Opdracht5.GeneratedMSBuildEditorConfig.editorconfig
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\Opdracht5.AssemblyInfoInputs.cache
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\Opdracht5.AssemblyInfo.cs
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\Opdracht5.csproj.CoreCompileInputs.cache
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\Opdracht5.dll
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\refint\Opdracht5.dll
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\Opdracht5.pdb
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\Opdracht5.genruntimeconfig.cache
+D:\github\webdev\Opdracht5\obj\Debug\net6.0\ref\Opdracht5.dll
