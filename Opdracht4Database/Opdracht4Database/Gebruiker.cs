@@ -3,10 +3,10 @@ namespace Database;
 
 public class Gebruiker
 {
+    // properties
     [Key]
     public int ID { get; set;}
     public string Email { get; set; }
-
     protected Gebruiker() { Email = null!; }
     public Gebruiker(string _email)
     {
