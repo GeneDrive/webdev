@@ -5,9 +5,9 @@ public class Attractie
 {
     // properties
     [Key]
-    public int ID { get; set;}
-    public string Naam { get; set;}
-    public async Task<bool> OnderhoudBezig(DatabaseContext c)
+    public int ID { get; set; }
+    public string naam { get; set; }
+    public async Task<bool> onderhoudBezig(DatabaseContext c)
     {
         ////////////////////////
         //
@@ -19,7 +19,7 @@ public class Attractie
         return true;
     }
 
-    public async Task<bool> Vrij(DatabaseContext c, DateTimeBereik d)
+    public async Task<bool> vrij(DatabaseContext c, DateTimeBereik d)
     {
         ////////////////////////
         //
@@ -32,4 +32,8 @@ public class Attractie
     }
 
     // relationships
+    public List<Reservering> reserveringen { get; set; }
+    public List<Gast> favorieten { get; set; }
+    public List<Onderhoud> onderhouds { get; set; }
+
 }

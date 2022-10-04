@@ -5,16 +5,16 @@ namespace Database;
 public class DateTimeBereik
 {
     // properties
-    public DateTime Begin { get; set; }
-    public DateTime? Eind { get; set; }
+    public DateTime begin { get; set; }
+    public DateTime? eind { get; set; }
     public bool Eindigt()
     {
-        Eind = DateTime.Now;
+        eind = DateTime.Now;
 
         return true;
     }
 
-    public bool Overlapt(DateTimeBereik that)
+    public bool overlapt(DateTimeBereik that)
     {   
         ///////////////////////
         //

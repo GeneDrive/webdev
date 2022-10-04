@@ -8,10 +8,10 @@ public class Reservering
     public int ID { get; set;}
     
     // relationships
-    public Gast gast { get; set;}
+    public Gast? gast { get; set;}
 
     // OWNED
     public DateTimeBereik dateTimeBereik { get; set; }
 
-    public Attractie attractie { get; set; }
+    public Attractie? attractie { get; set; }
 }

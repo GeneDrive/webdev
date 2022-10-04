@@ -12,4 +12,5 @@ public class GastInfo
     // relationships
     // OWNED
     public Coordinaat coordinaat { get; set; }
+    public Gast gast { get; set; }
 }

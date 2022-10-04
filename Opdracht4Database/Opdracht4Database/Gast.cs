@@ -4,17 +4,19 @@ namespace Database;
 public class Gast : Gebruiker
 {
     // properties
-    public int Credits { get; set;}
-    public DateTime GeboorteDatum { get; set;}
-    public DateTime EersteBezoek { get; set;}
-    protected Gast() { Email = null!; }
+    public int credits { get; set; }
+    public DateTime geboorteDatum { get; set; }
+    public DateTime eersteBezoek { get; set; }
+    protected Gast() { email = null!; }
     public Gast(string _email)
     {
-        Email = _email;
+        email = _email;
     }
 
     // relationships
-    public Gast Begeleidt { get; set;}
-
-    public GastInfo gastInfo { get; set;}
+    public Gast? begeleidt { get; set; }
+    public Attractie? favoriet { get; set; }
+    public List<Reservering> reserveringen { get; set; }
+    // OWNED
+    public GastInfo gastInfo { get; set; }
 }

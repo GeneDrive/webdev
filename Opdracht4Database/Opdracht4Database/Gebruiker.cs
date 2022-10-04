@@ -6,10 +6,10 @@ public class Gebruiker
     // properties
     [Key]
     public int ID { get; set;}
-    public string Email { get; set; }
-    protected Gebruiker() { Email = null!; }
+    public string email { get; set; }
+    protected Gebruiker() { email = null!; }
     public Gebruiker(string _email)
     {
-        Email = _email;
+        email = _email;
     }
 }

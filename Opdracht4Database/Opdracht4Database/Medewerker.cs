@@ -4,11 +4,14 @@ namespace Database;
 public class Medewerker : Gebruiker
 {
     // properties
-    protected Medewerker() { Email = null!; }
+    protected Medewerker() { email = null!; }
     public Medewerker(string _email)
     {
-        Email = _email;
+        email = _email;
     }
 
     // relationships
+    public List<Onderhoud> coordineerd { get; set; }
+
+    public List<Onderhoud> onderhoudt { get; set; }
 }
