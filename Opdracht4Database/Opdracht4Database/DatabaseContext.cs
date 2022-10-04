@@ -8,7 +8,7 @@ public class DatabaseContext : DbContext
         
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=Beest\"SQLEXPRESS\"\"MSSQLLocalDB;Initial Catalog=YourDatabase;Integrated Security=true");
+    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=BEEST\\SQLEXPRESS;Initial Catalog=YourDatabase;Integrated Security=true");
     
     public DbSet<Gebruiker> Gebruikers { get; set; }
 }
