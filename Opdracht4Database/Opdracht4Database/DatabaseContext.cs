@@ -47,6 +47,27 @@ public class DatabaseContext : DbContext
         builder.Entity<Gast>()
             .ToTable("Gasten");
 
+
+
+
+
+
+
+
+
+
+
+        //////////////////////////////
+        //
+        //
+        //
+        //
+        //
+        //
+        // HELP
+        //
+        //
+        //
         builder.Entity<Gast>()
             .HasOne(g => g.begeleidt)
             .WithOne(g2 => g2);
