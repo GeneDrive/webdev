@@ -4,12 +4,11 @@ namespace Database;
 public class Gebruiker
 {
     // properties
-    [Key]
     public int ID { get; set;}
     public string email { get; set; }
-    protected Gebruiker() { email = null!; }
-    public Gebruiker(string _email)
+    public Gebruiker(string email)
     {
-        email = _email;
+        this.email = email;
     }
+    
 }

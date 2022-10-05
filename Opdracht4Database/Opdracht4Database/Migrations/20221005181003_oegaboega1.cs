@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Opdracht4Database.Migrations
 {
-    public partial class oegaboega : Migration
+    public partial class oegaboega1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Attractie",
+                name: "Attracties",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -19,7 +19,7 @@ namespace Opdracht4Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attractie", x => x.ID);
+                    table.PrimaryKey("PK_Attracties", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,9 +64,9 @@ namespace Opdracht4Database.Migrations
                 {
                     table.PrimaryKey("PK_Onderhoud", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Onderhoud_Attractie_attractieID",
+                        name: "FK_Onderhoud_Attracties_attractieID",
                         column: x => x.attractieID,
-                        principalTable: "Attractie",
+                        principalTable: "Attracties",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -86,9 +86,9 @@ namespace Opdracht4Database.Migrations
                 {
                     table.PrimaryKey("PK_Gasten", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Gasten_Attractie_favorietID",
+                        name: "FK_Gasten_Attracties_favorietID",
                         column: x => x.favorietID,
-                        principalTable: "Attractie",
+                        principalTable: "Attracties",
                         principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_Gasten_Gasten_begeleidtID",
@@ -125,7 +125,7 @@ namespace Opdracht4Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reservering",
+                name: "Reserveringen",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -137,45 +137,21 @@ namespace Opdracht4Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reservering", x => x.ID);
+                    table.PrimaryKey("PK_Reserveringen", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Reservering_Attractie_attractieID",
+                        name: "FK_Reserveringen_Attracties_attractieID",
                         column: x => x.attractieID,
-                        principalTable: "Attractie",
+                        principalTable: "Attracties",
                         principalColumn: "ID");
                     table.ForeignKey(
-                        name: "FK_Reservering_Gasten_gastID",
+                        name: "FK_Reserveringen_Gasten_gastID",
                         column: x => x.gastID,
                         principalTable: "Gasten",
                         principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedewerkerOnderhoud",
-                columns: table => new
-                {
-                    onderhoudersID = table.Column<int>(type: "int", nullable: false),
-                    onderhoudtID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedewerkerOnderhoud", x => new { x.onderhoudersID, x.onderhoudtID });
-                    table.ForeignKey(
-                        name: "FK_MedewerkerOnderhoud_Medewerkers_onderhoudersID",
-                        column: x => x.onderhoudersID,
-                        principalTable: "Medewerkers",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MedewerkerOnderhoud_Onderhoud_onderhoudtID",
-                        column: x => x.onderhoudtID,
-                        principalTable: "Onderhoud",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MedewerkerOnderhoud1",
+                name: "Medewerker_Coordineert",
                 columns: table => new
                 {
                     coordinatorenID = table.Column<int>(type: "int", nullable: false),
@@ -183,16 +159,40 @@ namespace Opdracht4Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedewerkerOnderhoud1", x => new { x.coordinatorenID, x.coordineerdID });
+                    table.PrimaryKey("PK_Medewerker_Coordineert", x => new { x.coordinatorenID, x.coordineerdID });
                     table.ForeignKey(
-                        name: "FK_MedewerkerOnderhoud1_Medewerkers_coordinatorenID",
+                        name: "FK_Medewerker_Coordineert_Medewerkers_coordinatorenID",
                         column: x => x.coordinatorenID,
                         principalTable: "Medewerkers",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MedewerkerOnderhoud1_Onderhoud_coordineerdID",
+                        name: "FK_Medewerker_Coordineert_Onderhoud_coordineerdID",
                         column: x => x.coordineerdID,
+                        principalTable: "Onderhoud",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Medewerker_Onderhouden",
+                columns: table => new
+                {
+                    onderhoudersID = table.Column<int>(type: "int", nullable: false),
+                    onderhoudtID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medewerker_Onderhouden", x => new { x.onderhoudersID, x.onderhoudtID });
+                    table.ForeignKey(
+                        name: "FK_Medewerker_Onderhouden_Medewerkers_onderhoudersID",
+                        column: x => x.onderhoudersID,
+                        principalTable: "Medewerkers",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Medewerker_Onderhouden_Onderhoud_onderhoudtID",
+                        column: x => x.onderhoudtID,
                         principalTable: "Onderhoud",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -209,14 +209,14 @@ namespace Opdracht4Database.Migrations
                 column: "favorietID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedewerkerOnderhoud_onderhoudtID",
-                table: "MedewerkerOnderhoud",
-                column: "onderhoudtID");
+                name: "IX_Medewerker_Coordineert_coordineerdID",
+                table: "Medewerker_Coordineert",
+                column: "coordineerdID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedewerkerOnderhoud1_coordineerdID",
-                table: "MedewerkerOnderhoud1",
-                column: "coordineerdID");
+                name: "IX_Medewerker_Onderhouden_onderhoudtID",
+                table: "Medewerker_Onderhouden",
+                column: "onderhoudtID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Onderhoud_attractieID",
@@ -224,26 +224,26 @@ namespace Opdracht4Database.Migrations
                 column: "attractieID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservering_attractieID",
-                table: "Reservering",
+                name: "IX_Reserveringen_attractieID",
+                table: "Reserveringen",
                 column: "attractieID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservering_gastID",
-                table: "Reservering",
+                name: "IX_Reserveringen_gastID",
+                table: "Reserveringen",
                 column: "gastID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MedewerkerOnderhoud");
+                name: "Medewerker_Coordineert");
 
             migrationBuilder.DropTable(
-                name: "MedewerkerOnderhoud1");
+                name: "Medewerker_Onderhouden");
 
             migrationBuilder.DropTable(
-                name: "Reservering");
+                name: "Reserveringen");
 
             migrationBuilder.DropTable(
                 name: "Medewerkers");
@@ -255,7 +255,7 @@ namespace Opdracht4Database.Migrations
                 name: "Gasten");
 
             migrationBuilder.DropTable(
-                name: "Attractie");
+                name: "Attracties");
 
             migrationBuilder.DropTable(
                 name: "GastInfo");

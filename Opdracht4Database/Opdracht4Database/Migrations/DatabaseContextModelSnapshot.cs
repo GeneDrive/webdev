@@ -36,7 +36,7 @@ namespace Opdracht4Database.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Attractie", (string)null);
+                    b.ToTable("Attracties");
                 });
 
             modelBuilder.Entity("Database.GastInfo", b =>
@@ -53,7 +53,7 @@ namespace Opdracht4Database.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("GastInfo", (string)null);
+                    b.ToTable("GastInfo");
                 });
 
             modelBuilder.Entity("Database.Gebruiker", b =>
@@ -67,7 +67,7 @@ namespace Opdracht4Database.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Gebruikers");
+                    b.ToTable("Gebruikers", (string)null);
                 });
 
             modelBuilder.Entity("Database.Onderhoud", b =>
@@ -89,7 +89,7 @@ namespace Opdracht4Database.Migrations
 
                     b.HasIndex("attractieID");
 
-                    b.ToTable("Onderhoud", (string)null);
+                    b.ToTable("Onderhoud");
                 });
 
             modelBuilder.Entity("Database.Reservering", b =>
@@ -112,25 +112,10 @@ namespace Opdracht4Database.Migrations
 
                     b.HasIndex("gastID");
 
-                    b.ToTable("Reservering", (string)null);
+                    b.ToTable("Reserveringen");
                 });
 
-            modelBuilder.Entity("MedewerkerOnderhoud", b =>
-                {
-                    b.Property<int>("onderhoudersID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("onderhoudtID")
-                        .HasColumnType("int");
-
-                    b.HasKey("onderhoudersID", "onderhoudtID");
-
-                    b.HasIndex("onderhoudtID");
-
-                    b.ToTable("MedewerkerOnderhoud");
-                });
-
-            modelBuilder.Entity("MedewerkerOnderhoud1", b =>
+            modelBuilder.Entity("Medewerker_Coordineert", b =>
                 {
                     b.Property<int>("coordinatorenID")
                         .HasColumnType("int");
@@ -142,7 +127,22 @@ namespace Opdracht4Database.Migrations
 
                     b.HasIndex("coordineerdID");
 
-                    b.ToTable("MedewerkerOnderhoud1");
+                    b.ToTable("Medewerker_Coordineert");
+                });
+
+            modelBuilder.Entity("Medewerker_Onderhouden", b =>
+                {
+                    b.Property<int>("onderhoudersID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("onderhoudtID")
+                        .HasColumnType("int");
+
+                    b.HasKey("onderhoudersID", "onderhoudtID");
+
+                    b.HasIndex("onderhoudtID");
+
+                    b.ToTable("Medewerker_Onderhouden");
                 });
 
             modelBuilder.Entity("Database.Gast", b =>
@@ -244,7 +244,8 @@ namespace Opdracht4Database.Migrations
 
                     b.HasOne("Database.Gast", "gast")
                         .WithMany("reserveringen")
-                        .HasForeignKey("gastID");
+                        .HasForeignKey("gastID")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.OwnsOne("Database.DateTimeBereik", "dateTimeBereik", b1 =>
                         {
@@ -259,7 +260,7 @@ namespace Opdracht4Database.Migrations
 
                             b1.HasKey("ReserveringID");
 
-                            b1.ToTable("Reservering");
+                            b1.ToTable("Reserveringen");
 
                             b1.WithOwner()
                                 .HasForeignKey("ReserveringID");
@@ -273,22 +274,7 @@ namespace Opdracht4Database.Migrations
                     b.Navigation("gast");
                 });
 
-            modelBuilder.Entity("MedewerkerOnderhoud", b =>
-                {
-                    b.HasOne("Database.Medewerker", null)
-                        .WithMany()
-                        .HasForeignKey("onderhoudersID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Database.Onderhoud", null)
-                        .WithMany()
-                        .HasForeignKey("onderhoudtID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MedewerkerOnderhoud1", b =>
+            modelBuilder.Entity("Medewerker_Coordineert", b =>
                 {
                     b.HasOne("Database.Medewerker", null)
                         .WithMany()
@@ -299,6 +285,21 @@ namespace Opdracht4Database.Migrations
                     b.HasOne("Database.Onderhoud", null)
                         .WithMany()
                         .HasForeignKey("coordineerdID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Medewerker_Onderhouden", b =>
+                {
+                    b.HasOne("Database.Medewerker", null)
+                        .WithMany()
+                        .HasForeignKey("onderhoudersID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Database.Onderhoud", null)
+                        .WithMany()
+                        .HasForeignKey("onderhoudtID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

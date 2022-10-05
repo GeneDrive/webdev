@@ -7,11 +7,8 @@ public class Gast : Gebruiker
     public int credits { get; set; }
     public DateTime geboorteDatum { get; set; }
     public DateTime eersteBezoek { get; set; }
-    protected Gast() { email = null!; }
-    public Gast(string _email)
-    {
-        email = _email;
-    }
+
+    public Gast(string email) : base(email) => base.email = email;
 
     // relationships
     public Gast? begeleidt { get; set; }

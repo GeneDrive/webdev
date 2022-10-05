@@ -7,6 +7,12 @@ public class Attractie
     [Key]
     public int ID { get; set; }
     public string naam { get; set; }
+
+    protected Attractie() { naam = null!; }
+    public Attractie(string _naam)
+    {
+        naam = _naam;
+    }
     public async Task<bool> onderhoudBezig(DatabaseContext c)
     {
         ////////////////////////

@@ -3,12 +3,38 @@ namespace Database;
 
 public class DatabaseContext : DbContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=DESKTOP-TUMDC4U\\SQLEXPRESS;Initial Catalog=YourDatabase;Integrated Security=true");
-    
+    public async Task<bool> boek(Gast g, Attractie a, DateTimeBereik d)
+    {
+        ////////////////////////
+        //
+        //// Logica hier
+        //
+        ////////////////////////
+
+        // Temp
+        return true;
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=BEEST\\SQLEXPRESS;Initial Catalog=YourDatabase;Integrated Security=true");
     public DbSet<Gebruiker> Gebruikers { get; set; }
+    public DbSet<Medewerker> Medewerkers { get; set; }
+    public DbSet<Onderhoud> Onderhoud { get; set; }
+    public DbSet<Gast> Gasten { get; set; }
+    public DbSet<Attractie> Attracties { get; set; }
+    public DbSet<Reservering> Reserveringen { get; set; }
+
+
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        // Gebruiker
+        //
+        builder.Entity<Gebruiker>()
+            .ToTable("Gebruikers");
+
+        builder.Entity<Gebruiker>()
+            .HasKey(ge => ge.ID);
+
         // Medewerkers
         //
         builder.Entity<Medewerker>()
@@ -16,17 +42,16 @@ public class DatabaseContext : DbContext
 
         builder.Entity<Medewerker>()
             .HasMany(mw => mw.onderhoudt)
-            .WithMany(oh => oh.onderhouders);
+            .WithMany(oh => oh.onderhouders)
+            .UsingEntity("Medewerker_Onderhouden");
 
         builder.Entity<Medewerker>()
             .HasMany(mw => mw.coordineerd)
-            .WithMany(oh => oh.coordinatoren);
+            .WithMany(oh => oh.coordinatoren)
+            .UsingEntity("Medewerker_Coordineert");
 
         // Onderhoud
         //
-        builder.Entity<Onderhoud>()
-            .ToTable("Onderhoud");
-
         builder.Entity<Onderhoud>()
             .HasMany(oh => oh.coordinatoren)
             .WithMany(mw => mw.coordineerd);
@@ -67,9 +92,6 @@ public class DatabaseContext : DbContext
         // Attractie
         //
         builder.Entity<Attractie>()
-            .ToTable("Attractie");
-
-        builder.Entity<Attractie>()
             .HasMany(at => at.reserveringen)
             .WithOne(re => re.attractie);
 
@@ -84,9 +106,6 @@ public class DatabaseContext : DbContext
         // GastInfo
         //
         builder.Entity<GastInfo>()
-            .ToTable("GastInfo");
-
-        builder.Entity<GastInfo>()
             .OwnsOne(typeof(Coordinaat), "coordinaat");
 
         builder.Entity<GastInfo>()
@@ -95,9 +114,6 @@ public class DatabaseContext : DbContext
 
         // Reservering
         //
-        builder.Entity<Reservering>()
-            .ToTable("Reservering");
-
         builder.Entity<Reservering>()
             .OwnsOne(typeof(DateTimeBereik), "dateTimeBereik");
 

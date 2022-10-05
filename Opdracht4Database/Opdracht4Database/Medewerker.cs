@@ -3,13 +3,7 @@ namespace Database;
 
 public class Medewerker : Gebruiker
 {
-    // properties
-    protected Medewerker() { email = null!; }
-    public Medewerker(string _email)
-    {
-        email = _email;
-    }
-
+    public Medewerker(string email) : base(email) => base.email = email;
     // relationships
     public List<Onderhoud> coordineerd { get; set; }
 
