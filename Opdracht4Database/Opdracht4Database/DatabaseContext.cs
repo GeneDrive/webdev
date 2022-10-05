@@ -3,7 +3,7 @@ namespace Database;
 
 public class DatabaseContext : DbContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=BEEST\\SQLEXPRESS;Initial Catalog=YourDatabase;Integrated Security=true");
+    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=DESKTOP-TUMDC4U\\SQLEXPRESS;Initial Catalog=YourDatabase;Integrated Security=true");
     
     public DbSet<Gebruiker> Gebruikers { get; set; }
 
@@ -47,30 +47,8 @@ public class DatabaseContext : DbContext
         builder.Entity<Gast>()
             .ToTable("Gasten");
 
-
-
-
-
-
-
-
-
-
-
-        //////////////////////////////
-        //
-        //
-        //
-        //
-        //
-        //
-        // HELP
-        //
-        //
-        //
         builder.Entity<Gast>()
-            .HasOne(g => g.begeleidt)
-            .WithOne(g2 => g2);
+            .HasOne(g => g.begeleidt);
 
         builder.Entity<Gast>()
             .HasOne(ga => ga.favoriet)
@@ -78,10 +56,13 @@ public class DatabaseContext : DbContext
 
         builder.Entity<Gast>()
             .HasMany(ga => ga.reserveringen)
-            .WithOne(re => re.gast);
+            .WithOne(re => re.gast)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.Entity<Gast>()
-            .OwnsOne(typeof(GastInfo), "gastInfo");
+            .HasOne(ga => ga.gastInfo)
+            .WithOne(gi => gi.gast)
+            .HasForeignKey<Gast>(ga => ga.ID);
 
         // Attractie
         //
