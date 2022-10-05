@@ -4,8 +4,7 @@ namespace Database;
 public class Attractie
 {
     // properties
-    [Key]
-    public int ID { get; set; }
+    public int Id { get; set; }
     public string naam { get; set; }
 
     protected Attractie() { naam = null!; }

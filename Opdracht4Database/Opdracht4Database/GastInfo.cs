@@ -4,8 +4,7 @@ namespace Database;
 public class GastInfo
 {
     // properties
-    [Key]
-    public int ID { get; set;}
+    public int Id { get; set;}
 
     public string LaatstBezochteURL { get; set; }
 

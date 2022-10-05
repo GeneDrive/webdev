@@ -24,123 +24,123 @@ namespace Opdracht4Database.Migrations
 
             modelBuilder.Entity("Database.Attractie", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Attracties");
                 });
 
             modelBuilder.Entity("Database.GastInfo", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("LaatstBezochteURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("GastInfo");
                 });
 
             modelBuilder.Entity("Database.Gebruiker", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Gebruikers", (string)null);
                 });
 
             modelBuilder.Entity("Database.Onderhoud", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("attractieID")
+                    b.Property<int>("attractieId")
                         .HasColumnType("int");
 
                     b.Property<string>("probleem")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("attractieID");
+                    b.HasIndex("attractieId");
 
                     b.ToTable("Onderhoud");
                 });
 
             modelBuilder.Entity("Database.Reservering", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("attractieID")
+                    b.Property<int?>("attractieId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("gastID")
+                    b.Property<int?>("gastId")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("attractieID");
+                    b.HasIndex("attractieId");
 
-                    b.HasIndex("gastID");
+                    b.HasIndex("gastId");
 
                     b.ToTable("Reserveringen");
                 });
 
             modelBuilder.Entity("Medewerker_Coordineert", b =>
                 {
-                    b.Property<int>("coordinatorenID")
+                    b.Property<int>("coordinatorenId")
                         .HasColumnType("int");
 
-                    b.Property<int>("coordineerdID")
+                    b.Property<int>("coordineerdId")
                         .HasColumnType("int");
 
-                    b.HasKey("coordinatorenID", "coordineerdID");
+                    b.HasKey("coordinatorenId", "coordineerdId");
 
-                    b.HasIndex("coordineerdID");
+                    b.HasIndex("coordineerdId");
 
                     b.ToTable("Medewerker_Coordineert");
                 });
 
             modelBuilder.Entity("Medewerker_Onderhouden", b =>
                 {
-                    b.Property<int>("onderhoudersID")
+                    b.Property<int>("onderhoudersId")
                         .HasColumnType("int");
 
-                    b.Property<int>("onderhoudtID")
+                    b.Property<int>("onderhoudtId")
                         .HasColumnType("int");
 
-                    b.HasKey("onderhoudersID", "onderhoudtID");
+                    b.HasKey("onderhoudersId", "onderhoudtId");
 
-                    b.HasIndex("onderhoudtID");
+                    b.HasIndex("onderhoudtId");
 
                     b.ToTable("Medewerker_Onderhouden");
                 });
@@ -149,7 +149,7 @@ namespace Opdracht4Database.Migrations
                 {
                     b.HasBaseType("Database.Gebruiker");
 
-                    b.Property<int?>("begeleidtID")
+                    b.Property<int?>("begeleidtId")
                         .HasColumnType("int");
 
                     b.Property<int>("credits")
@@ -158,15 +158,15 @@ namespace Opdracht4Database.Migrations
                     b.Property<DateTime>("eersteBezoek")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("favorietID")
+                    b.Property<int?>("favorietId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("geboorteDatum")
                         .HasColumnType("datetime2");
 
-                    b.HasIndex("begeleidtID");
+                    b.HasIndex("begeleidtId");
 
-                    b.HasIndex("favorietID");
+                    b.HasIndex("favorietId");
 
                     b.ToTable("Gasten", (string)null);
                 });
@@ -182,7 +182,7 @@ namespace Opdracht4Database.Migrations
                 {
                     b.OwnsOne("Database.Coordinaat", "coordinaat", b1 =>
                         {
-                            b1.Property<int>("GastInfoID")
+                            b1.Property<int>("GastInfoId")
                                 .HasColumnType("int");
 
                             b1.Property<int>("X")
@@ -191,12 +191,12 @@ namespace Opdracht4Database.Migrations
                             b1.Property<int>("Y")
                                 .HasColumnType("int");
 
-                            b1.HasKey("GastInfoID");
+                            b1.HasKey("GastInfoId");
 
                             b1.ToTable("GastInfo");
 
                             b1.WithOwner()
-                                .HasForeignKey("GastInfoID");
+                                .HasForeignKey("GastInfoId");
                         });
 
                     b.Navigation("coordinaat")
@@ -207,13 +207,13 @@ namespace Opdracht4Database.Migrations
                 {
                     b.HasOne("Database.Attractie", "attractie")
                         .WithMany("onderhouds")
-                        .HasForeignKey("attractieID")
+                        .HasForeignKey("attractieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.OwnsOne("Database.DateTimeBereik", "dateTimeBereik", b1 =>
                         {
-                            b1.Property<int>("OnderhoudID")
+                            b1.Property<int>("OnderhoudId")
                                 .HasColumnType("int");
 
                             b1.Property<DateTime>("begin")
@@ -222,12 +222,12 @@ namespace Opdracht4Database.Migrations
                             b1.Property<DateTime?>("eind")
                                 .HasColumnType("datetime2");
 
-                            b1.HasKey("OnderhoudID");
+                            b1.HasKey("OnderhoudId");
 
                             b1.ToTable("Onderhoud");
 
                             b1.WithOwner()
-                                .HasForeignKey("OnderhoudID");
+                                .HasForeignKey("OnderhoudId");
                         });
 
                     b.Navigation("attractie");
@@ -240,16 +240,16 @@ namespace Opdracht4Database.Migrations
                 {
                     b.HasOne("Database.Attractie", "attractie")
                         .WithMany("reserveringen")
-                        .HasForeignKey("attractieID");
+                        .HasForeignKey("attractieId");
 
                     b.HasOne("Database.Gast", "gast")
                         .WithMany("reserveringen")
-                        .HasForeignKey("gastID")
+                        .HasForeignKey("gastId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.OwnsOne("Database.DateTimeBereik", "dateTimeBereik", b1 =>
                         {
-                            b1.Property<int>("ReserveringID")
+                            b1.Property<int>("ReserveringId")
                                 .HasColumnType("int");
 
                             b1.Property<DateTime>("begin")
@@ -258,12 +258,12 @@ namespace Opdracht4Database.Migrations
                             b1.Property<DateTime?>("eind")
                                 .HasColumnType("datetime2");
 
-                            b1.HasKey("ReserveringID");
+                            b1.HasKey("ReserveringId");
 
                             b1.ToTable("Reserveringen");
 
                             b1.WithOwner()
-                                .HasForeignKey("ReserveringID");
+                                .HasForeignKey("ReserveringId");
                         });
 
                     b.Navigation("attractie");
@@ -278,13 +278,13 @@ namespace Opdracht4Database.Migrations
                 {
                     b.HasOne("Database.Medewerker", null)
                         .WithMany()
-                        .HasForeignKey("coordinatorenID")
+                        .HasForeignKey("coordinatorenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Database.Onderhoud", null)
                         .WithMany()
-                        .HasForeignKey("coordineerdID")
+                        .HasForeignKey("coordineerdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -293,13 +293,13 @@ namespace Opdracht4Database.Migrations
                 {
                     b.HasOne("Database.Medewerker", null)
                         .WithMany()
-                        .HasForeignKey("onderhoudersID")
+                        .HasForeignKey("onderhoudersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Database.Onderhoud", null)
                         .WithMany()
-                        .HasForeignKey("onderhoudtID")
+                        .HasForeignKey("onderhoudtId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -308,23 +308,23 @@ namespace Opdracht4Database.Migrations
                 {
                     b.HasOne("Database.GastInfo", "gastInfo")
                         .WithOne("gast")
-                        .HasForeignKey("Database.Gast", "ID")
+                        .HasForeignKey("Database.Gast", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Database.Gebruiker", null)
                         .WithOne()
-                        .HasForeignKey("Database.Gast", "ID")
+                        .HasForeignKey("Database.Gast", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Database.Gast", "begeleidt")
                         .WithMany()
-                        .HasForeignKey("begeleidtID");
+                        .HasForeignKey("begeleidtId");
 
                     b.HasOne("Database.Attractie", "favoriet")
                         .WithMany("favorieten")
-                        .HasForeignKey("favorietID");
+                        .HasForeignKey("favorietId");
 
                     b.Navigation("begeleidt");
 
@@ -337,7 +337,7 @@ namespace Opdracht4Database.Migrations
                 {
                     b.HasOne("Database.Gebruiker", null)
                         .WithOne()
-                        .HasForeignKey("Database.Medewerker", "ID")
+                        .HasForeignKey("Database.Medewerker", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });

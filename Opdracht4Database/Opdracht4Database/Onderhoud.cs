@@ -4,8 +4,7 @@ namespace Database;
 public class Onderhoud
 {
     // properties
-    [Key]
-    public int ID { get; set; }
+    public int Id { get; set; }
     
     public string probleem { get; set; }
 

@@ -13,20 +13,20 @@ namespace Opdracht4Database.Migrations
                 name: "Attracties",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     naam = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attracties", x => x.ID);
+                    table.PrimaryKey("PK_Attracties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "GastInfo",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LaatstBezochteURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     coordinaat_X = table.Column<int>(type: "int", nullable: false),
@@ -34,40 +34,40 @@ namespace Opdracht4Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GastInfo", x => x.ID);
+                    table.PrimaryKey("PK_GastInfo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Gebruikers",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gebruikers", x => x.ID);
+                    table.PrimaryKey("PK_Gebruikers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Onderhoud",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     probleem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    attractieID = table.Column<int>(type: "int", nullable: false),
+                    attractieId = table.Column<int>(type: "int", nullable: false),
                     dateTimeBereik_begin = table.Column<DateTime>(type: "datetime2", nullable: false),
                     dateTimeBereik_eind = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Onderhoud", x => x.ID);
+                    table.PrimaryKey("PK_Onderhoud", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Onderhoud_Attracties_attractieID",
-                        column: x => x.attractieID,
+                        name: "FK_Onderhoud_Attracties_attractieId",
+                        column: x => x.attractieId,
                         principalTable: "Attracties",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -75,102 +75,102 @@ namespace Opdracht4Database.Migrations
                 name: "Gasten",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     credits = table.Column<int>(type: "int", nullable: false),
                     geboorteDatum = table.Column<DateTime>(type: "datetime2", nullable: false),
                     eersteBezoek = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    begeleidtID = table.Column<int>(type: "int", nullable: true),
-                    favorietID = table.Column<int>(type: "int", nullable: true)
+                    begeleidtId = table.Column<int>(type: "int", nullable: true),
+                    favorietId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gasten", x => x.ID);
+                    table.PrimaryKey("PK_Gasten", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Gasten_Attracties_favorietID",
-                        column: x => x.favorietID,
+                        name: "FK_Gasten_Attracties_favorietId",
+                        column: x => x.favorietId,
                         principalTable: "Attracties",
-                        principalColumn: "ID");
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Gasten_Gasten_begeleidtID",
-                        column: x => x.begeleidtID,
+                        name: "FK_Gasten_Gasten_begeleidtId",
+                        column: x => x.begeleidtId,
                         principalTable: "Gasten",
-                        principalColumn: "ID");
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Gasten_GastInfo_ID",
-                        column: x => x.ID,
+                        name: "FK_Gasten_GastInfo_Id",
+                        column: x => x.Id,
                         principalTable: "GastInfo",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Gasten_Gebruikers_ID",
-                        column: x => x.ID,
+                        name: "FK_Gasten_Gebruikers_Id",
+                        column: x => x.Id,
                         principalTable: "Gebruikers",
-                        principalColumn: "ID");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Medewerkers",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Medewerkers", x => x.ID);
+                    table.PrimaryKey("PK_Medewerkers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Medewerkers_Gebruikers_ID",
-                        column: x => x.ID,
+                        name: "FK_Medewerkers_Gebruikers_Id",
+                        column: x => x.Id,
                         principalTable: "Gebruikers",
-                        principalColumn: "ID");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Reserveringen",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    gastID = table.Column<int>(type: "int", nullable: true),
+                    gastId = table.Column<int>(type: "int", nullable: true),
                     dateTimeBereik_begin = table.Column<DateTime>(type: "datetime2", nullable: false),
                     dateTimeBereik_eind = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    attractieID = table.Column<int>(type: "int", nullable: true)
+                    attractieId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reserveringen", x => x.ID);
+                    table.PrimaryKey("PK_Reserveringen", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reserveringen_Attracties_attractieID",
-                        column: x => x.attractieID,
+                        name: "FK_Reserveringen_Attracties_attractieId",
+                        column: x => x.attractieId,
                         principalTable: "Attracties",
-                        principalColumn: "ID");
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Reserveringen_Gasten_gastID",
-                        column: x => x.gastID,
+                        name: "FK_Reserveringen_Gasten_gastId",
+                        column: x => x.gastId,
                         principalTable: "Gasten",
-                        principalColumn: "ID");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Medewerker_Coordineert",
                 columns: table => new
                 {
-                    coordinatorenID = table.Column<int>(type: "int", nullable: false),
-                    coordineerdID = table.Column<int>(type: "int", nullable: false)
+                    coordinatorenId = table.Column<int>(type: "int", nullable: false),
+                    coordineerdId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Medewerker_Coordineert", x => new { x.coordinatorenID, x.coordineerdID });
+                    table.PrimaryKey("PK_Medewerker_Coordineert", x => new { x.coordinatorenId, x.coordineerdId });
                     table.ForeignKey(
-                        name: "FK_Medewerker_Coordineert_Medewerkers_coordinatorenID",
-                        column: x => x.coordinatorenID,
+                        name: "FK_Medewerker_Coordineert_Medewerkers_coordinatorenId",
+                        column: x => x.coordinatorenId,
                         principalTable: "Medewerkers",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Medewerker_Coordineert_Onderhoud_coordineerdID",
-                        column: x => x.coordineerdID,
+                        name: "FK_Medewerker_Coordineert_Onderhoud_coordineerdId",
+                        column: x => x.coordineerdId,
                         principalTable: "Onderhoud",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -178,60 +178,60 @@ namespace Opdracht4Database.Migrations
                 name: "Medewerker_Onderhouden",
                 columns: table => new
                 {
-                    onderhoudersID = table.Column<int>(type: "int", nullable: false),
-                    onderhoudtID = table.Column<int>(type: "int", nullable: false)
+                    onderhoudersId = table.Column<int>(type: "int", nullable: false),
+                    onderhoudtId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Medewerker_Onderhouden", x => new { x.onderhoudersID, x.onderhoudtID });
+                    table.PrimaryKey("PK_Medewerker_Onderhouden", x => new { x.onderhoudersId, x.onderhoudtId });
                     table.ForeignKey(
-                        name: "FK_Medewerker_Onderhouden_Medewerkers_onderhoudersID",
-                        column: x => x.onderhoudersID,
+                        name: "FK_Medewerker_Onderhouden_Medewerkers_onderhoudersId",
+                        column: x => x.onderhoudersId,
                         principalTable: "Medewerkers",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Medewerker_Onderhouden_Onderhoud_onderhoudtID",
-                        column: x => x.onderhoudtID,
+                        name: "FK_Medewerker_Onderhouden_Onderhoud_onderhoudtId",
+                        column: x => x.onderhoudtId,
                         principalTable: "Onderhoud",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Gasten_begeleidtID",
+                name: "IX_Gasten_begeleidtId",
                 table: "Gasten",
-                column: "begeleidtID");
+                column: "begeleidtId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Gasten_favorietID",
+                name: "IX_Gasten_favorietId",
                 table: "Gasten",
-                column: "favorietID");
+                column: "favorietId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Medewerker_Coordineert_coordineerdID",
+                name: "IX_Medewerker_Coordineert_coordineerdId",
                 table: "Medewerker_Coordineert",
-                column: "coordineerdID");
+                column: "coordineerdId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Medewerker_Onderhouden_onderhoudtID",
+                name: "IX_Medewerker_Onderhouden_onderhoudtId",
                 table: "Medewerker_Onderhouden",
-                column: "onderhoudtID");
+                column: "onderhoudtId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Onderhoud_attractieID",
+                name: "IX_Onderhoud_attractieId",
                 table: "Onderhoud",
-                column: "attractieID");
+                column: "attractieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reserveringen_attractieID",
+                name: "IX_Reserveringen_attractieId",
                 table: "Reserveringen",
-                column: "attractieID");
+                column: "attractieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reserveringen_gastID",
+                name: "IX_Reserveringen_gastId",
                 table: "Reserveringen",
-                column: "gastID");
+                column: "gastId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

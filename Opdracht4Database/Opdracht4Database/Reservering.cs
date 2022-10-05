@@ -4,8 +4,7 @@ namespace Database;
 public class Reservering
 {
     // properties
-    [Key]
-    public int ID { get; set;}
+    public int Id { get; set;}
     
     // relationships
     public Gast? gast { get; set;}

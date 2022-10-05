@@ -15,7 +15,7 @@ public class DatabaseContext : DbContext
         return true;
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=BEEST\\SQLEXPRESS;Initial Catalog=YourDatabase;Integrated Security=true");
+    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=BEEST\\SQLEXPRESS;Initial Catalog=YourDatabase;Trusted_Connection=True;").EnableSensitiveDataLogging(true);
     public DbSet<Gebruiker> Gebruikers { get; set; }
     public DbSet<Medewerker> Medewerkers { get; set; }
     public DbSet<Onderhoud> Onderhoud { get; set; }
@@ -33,7 +33,7 @@ public class DatabaseContext : DbContext
             .ToTable("Gebruikers");
 
         builder.Entity<Gebruiker>()
-            .HasKey(ge => ge.ID);
+            .HasKey(ge => ge.Id);
 
         // Medewerkers
         //
@@ -53,6 +53,9 @@ public class DatabaseContext : DbContext
         // Onderhoud
         //
         builder.Entity<Onderhoud>()
+                .HasKey(oh => oh.Id);
+
+        builder.Entity<Onderhoud>()
             .HasMany(oh => oh.coordinatoren)
             .WithMany(mw => mw.coordineerd);
 
@@ -65,7 +68,7 @@ public class DatabaseContext : DbContext
             .WithMany(at => at.onderhouds);
 
         builder.Entity<Onderhoud>()
-            .OwnsOne(typeof(DateTimeBereik), "dateTimeBereik");
+            .OwnsOne(oh => oh.dateTimeBereik);
             
         // Gast
         //
@@ -87,10 +90,13 @@ public class DatabaseContext : DbContext
         builder.Entity<Gast>()
             .HasOne(ga => ga.gastInfo)
             .WithOne(gi => gi.gast)
-            .HasForeignKey<Gast>(ga => ga.ID);
+            .HasForeignKey<Gast>(ga => ga.Id);
 
         // Attractie
         //
+        builder.Entity<Attractie>()
+                .HasKey(at => at.Id);
+
         builder.Entity<Attractie>()
             .HasMany(at => at.reserveringen)
             .WithOne(re => re.attractie);
@@ -106,7 +112,10 @@ public class DatabaseContext : DbContext
         // GastInfo
         //
         builder.Entity<GastInfo>()
-            .OwnsOne(typeof(Coordinaat), "coordinaat");
+                .HasKey(gi => gi.Id);
+
+        builder.Entity<GastInfo>()
+            .OwnsOne(gi => gi.coordinaat);
 
         builder.Entity<GastInfo>()
             .HasOne(gi => gi.gast)
@@ -115,7 +124,7 @@ public class DatabaseContext : DbContext
         // Reservering
         //
         builder.Entity<Reservering>()
-            .OwnsOne(typeof(DateTimeBereik), "dateTimeBereik");
+            .OwnsOne(re => re.dateTimeBereik);
 
         builder.Entity<Reservering>()
             .HasOne(re => re.attractie)
