@@ -17,6 +17,8 @@ namespace Pretpark
                 using Stream request = new NetworkStream(connectie);
                 using StreamReader requestLezer = new StreamReader(request);
 
+                string userAgentMessage = "U gebruikt de browser: ";
+
                 string[]? regel1 = requestLezer.ReadLine()?.Split(" ");
                 if (regel1 == null) continue;
                 (string methode, string url, string httpversie) = (regel1[0], regel1[1], regel1[2]);
@@ -30,7 +32,40 @@ namespace Pretpark
                     if (header.ToLower() == "content-length")
                         contentLength = int.Parse(waarde);
                     regel = requestLezer.ReadLine();
-                    Console.WriteLine(header);
+                    if (header.ToLower() == "user-agent")
+                    {
+                        string tmp = waarde;
+                        string[] tmpParts = tmp.Split(" ");
+                        string browser = "";
+                        if(tmpParts.Length == 13)
+                        {
+                            browser = tmpParts[tmpParts.Length - 2];
+                        } 
+                        else
+                        {
+                            browser = tmpParts[tmpParts.Length - 1];
+                        }
+
+                        string[] browserParts = browser.Split("/");
+                        switch(browserParts[0])
+                        {
+                            case "rv":
+                                userAgentMessage += "FireFox";
+                            break;
+                            case "Chrome":
+                                userAgentMessage += "Chrome";
+                            break;
+                            case "OPR":
+                                userAgentMessage += "Opera";
+                            break;
+                            case "Edg":
+                                userAgentMessage += "Microsoft Edge";
+                            break;
+                            default:
+                                userAgentMessage += "Unknown";
+                            break;
+                        }
+                    }
                 }
                 if (contentLength > 0)
                 {
@@ -43,10 +78,8 @@ namespace Pretpark
                 
                 if(url == "/")
                 {
-                    Console.WriteLine(methode);
-
                     correctURL = true;
-                    message = "<p>Welkom bij de website van Pretpark <a href=\"https://nl.wikipedia.org/wiki/Den_Haag\">Den Haag!</a></p>";
+                    message = "<p>Welkom bij de website van Pretpark <a href=\"https://nl.wikipedia.org/wiki/Den_Haag\">Den Haag!</a></p><br>" + userAgentMessage;
             
                     messageSize = message.Length;
                 }
@@ -69,7 +102,6 @@ namespace Pretpark
                 {
                     correctURL = true;
                     string tempString = url.Substring(5);
-                    Console.WriteLine(tempString);
 
                     int ?a = null;
                     int ?b = null;
@@ -139,15 +171,6 @@ namespace Pretpark
                     connectie.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 404 OK\r\nContent-Type: text/html\r\nContent-Length: " + messageSize +"\r\n\r\n" + message + ""));
                 }
             }
-            //////////////////////////////////////////////////////////////
-            //
-            //
-            //
-            // laatste vraag over user agent lukt niet
-            //
-            //
-            //
-            ///////////////////////////////////////////////////////////
         }
     }
 }
