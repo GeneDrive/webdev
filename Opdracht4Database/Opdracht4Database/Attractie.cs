@@ -14,27 +14,25 @@ public class Attractie
     }
     public async Task<bool> onderhoudBezig(DatabaseContext c)
     {
-        ////////////////////////
-        //
-        //// Logica hier
-        //
-        ////////////////////////
+        var onderhouden = await Task.Run(() => c.Onderhoud.Where(oh => oh.dateTimeBereik.eind < DateTime.Today).Count());
 
-        // Temp
-        return true;
+        if (onderhouden > 0) 
+            return true;
+
+        return false;
     }
 
     public async Task<bool> vrij(DatabaseContext c, DateTimeBereik d)
     {
-        ////////////////////////
-        //
-        //// Logica hier
-        //
-        ////////////////////////
+        var reserv = await Task.Run(() => c.Reserveringen.Single(re => re.dateTimeBereik == d));
 
-        // Temp
-        return true;
+        if(reserv == null && await onderhoudBezig(c) == false)
+            return true;
+
+        return false;
     }
+
+    public readonly SemaphoreSlim Semaphore = new SemaphoreSlim(1, 1);
 
     // relationships
     public List<Reservering> reserveringen { get; set; }

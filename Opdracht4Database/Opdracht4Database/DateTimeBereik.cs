@@ -16,21 +16,17 @@ public class DateTimeBereik
 
     public bool overlapt(DateTimeBereik that)
     {   
-        ///////////////////////
-        //
-        //// Logica hier
-        //
-        ////////////////////////
-        // if(this == that)
-        // {
-        //     return true;
-        // }
-        // else
-        // {
-        //     return false;
-        // }
-
-        // Temp
-        return true;
+        if(this.begin >= that.begin && this.begin <= that.eind)
+        {
+            return true;
+        }
+        else if(this.eind >= that.begin && this.eind <= that.eind)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

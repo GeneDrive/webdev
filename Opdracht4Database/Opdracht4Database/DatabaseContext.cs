@@ -5,11 +5,10 @@ public class DatabaseContext : DbContext
 {
     public async Task<bool> boek(Gast g, Attractie a, DateTimeBereik d)
     {
-        ////////////////////////
-        //
-        //// Logica hier
-        //
-        ////////////////////////
+        if(await a.vrij(this, d))
+        {
+            g.credits--;
+        }
 
         // Temp
         return true;
@@ -97,7 +96,6 @@ public class DatabaseContext : DbContext
 
         // GastInfo
         //
-
         builder.Entity<GastInfo>()
             .OwnsOne(gi => gi.coordinaat);
 

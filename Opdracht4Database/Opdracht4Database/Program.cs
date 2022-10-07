@@ -24,7 +24,7 @@ public class main{
                 c.Attracties.Add(new Attractie(attractie));
 
             c.SaveChanges();
-
+c.Medewerkers.Add(new Medewerker($"medewerker1@mail.com"));
             for (int i=0;i<40;i++)
                 c.Medewerkers.Add(new Medewerker($"medewerker{i}@mail.com"));
             c.SaveChanges();
