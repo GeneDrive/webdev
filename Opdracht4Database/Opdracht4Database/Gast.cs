@@ -14,6 +14,6 @@ public class Gast : Gebruiker
     public Gast? begeleidt { get; set; }
     public Attractie? favoriet { get; set; }
     public List<Reservering> reserveringen { get; set; }
-    // OWNED
+
     public GastInfo gastInfo { get; set; }
 }

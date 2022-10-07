@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Opdracht4Database.Migrations
 {
-    public partial class oegaboega1 : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,25 +23,11 @@ namespace Opdracht4Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GastInfo",
+                name: "Gebruikers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LaatstBezochteURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    coordinaat_X = table.Column<int>(type: "int", nullable: false),
-                    coordinaat_Y = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GastInfo", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Gebruikers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
                     email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -96,12 +82,6 @@ namespace Opdracht4Database.Migrations
                         principalTable: "Gasten",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Gasten_GastInfo_Id",
-                        column: x => x.Id,
-                        principalTable: "GastInfo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Gasten_Gebruikers_Id",
                         column: x => x.Id,
                         principalTable: "Gebruikers",
@@ -122,6 +102,28 @@ namespace Opdracht4Database.Migrations
                         column: x => x.Id,
                         principalTable: "Gebruikers",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GastInfo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LaatstBezochteURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    coordinaat_X = table.Column<int>(type: "int", nullable: false),
+                    coordinaat_Y = table.Column<int>(type: "int", nullable: false),
+                    gastForeignKey = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GastInfo", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GastInfo_Gasten_gastForeignKey",
+                        column: x => x.gastForeignKey,
+                        principalTable: "Gasten",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,6 +211,12 @@ namespace Opdracht4Database.Migrations
                 column: "favorietId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GastInfo_gastForeignKey",
+                table: "GastInfo",
+                column: "gastForeignKey",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Medewerker_Coordineert_coordineerdId",
                 table: "Medewerker_Coordineert",
                 column: "coordineerdId");
@@ -237,6 +245,9 @@ namespace Opdracht4Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "GastInfo");
+
+            migrationBuilder.DropTable(
                 name: "Medewerker_Coordineert");
 
             migrationBuilder.DropTable(
@@ -256,9 +267,6 @@ namespace Opdracht4Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "Attracties");
-
-            migrationBuilder.DropTable(
-                name: "GastInfo");
 
             migrationBuilder.DropTable(
                 name: "Gebruikers");

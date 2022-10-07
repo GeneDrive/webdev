@@ -11,5 +11,6 @@ public class GastInfo
     // relationships
     // OWNED
     public Coordinaat coordinaat { get; set; }
+    public int gastForeignKey { get; set; }
     public Gast gast { get; set; }
 }

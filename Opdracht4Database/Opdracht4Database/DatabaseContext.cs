@@ -27,14 +27,6 @@ public class DatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        // Gebruiker
-        //
-        builder.Entity<Gebruiker>()
-            .ToTable("Gebruikers");
-
-        builder.Entity<Gebruiker>()
-            .HasKey(ge => ge.Id);
-
         // Medewerkers
         //
         builder.Entity<Medewerker>()
@@ -52,9 +44,6 @@ public class DatabaseContext : DbContext
 
         // Onderhoud
         //
-        builder.Entity<Onderhoud>()
-                .HasKey(oh => oh.Id);
-
         builder.Entity<Onderhoud>()
             .HasMany(oh => oh.coordinatoren)
             .WithMany(mw => mw.coordineerd);
@@ -90,13 +79,10 @@ public class DatabaseContext : DbContext
         builder.Entity<Gast>()
             .HasOne(ga => ga.gastInfo)
             .WithOne(gi => gi.gast)
-            .HasForeignKey<Gast>(ga => ga.Id);
+            .HasForeignKey<GastInfo>(ga => ga.gastForeignKey);
 
         // Attractie
         //
-        builder.Entity<Attractie>()
-                .HasKey(at => at.Id);
-
         builder.Entity<Attractie>()
             .HasMany(at => at.reserveringen)
             .WithOne(re => re.attractie);
@@ -111,8 +97,6 @@ public class DatabaseContext : DbContext
 
         // GastInfo
         //
-        builder.Entity<GastInfo>()
-                .HasKey(gi => gi.Id);
 
         builder.Entity<GastInfo>()
             .OwnsOne(gi => gi.coordinaat);
@@ -125,6 +109,10 @@ public class DatabaseContext : DbContext
         //
         builder.Entity<Reservering>()
             .OwnsOne(re => re.dateTimeBereik);
+
+        builder.Entity<Reservering>()
+            .HasOne(re => re.gast)
+            .WithMany(ga => ga.reserveringen);
 
         builder.Entity<Reservering>()
             .HasOne(re => re.attractie)

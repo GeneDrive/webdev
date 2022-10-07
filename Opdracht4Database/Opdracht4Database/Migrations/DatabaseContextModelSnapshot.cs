@@ -51,7 +51,13 @@ namespace Opdracht4Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("gastForeignKey")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("gastForeignKey")
+                        .IsUnique();
 
                     b.ToTable("GastInfo");
                 });
@@ -59,7 +65,10 @@ namespace Opdracht4Database.Migrations
             modelBuilder.Entity("Database.Gebruiker", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("email")
                         .IsRequired()
@@ -67,7 +76,7 @@ namespace Opdracht4Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gebruikers", (string)null);
+                    b.ToTable("Gebruikers");
                 });
 
             modelBuilder.Entity("Database.Onderhoud", b =>
@@ -180,6 +189,12 @@ namespace Opdracht4Database.Migrations
 
             modelBuilder.Entity("Database.GastInfo", b =>
                 {
+                    b.HasOne("Database.Gast", "gast")
+                        .WithOne("gastInfo")
+                        .HasForeignKey("Database.GastInfo", "gastForeignKey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("Database.Coordinaat", "coordinaat", b1 =>
                         {
                             b1.Property<int>("GastInfoId")
@@ -201,6 +216,8 @@ namespace Opdracht4Database.Migrations
 
                     b.Navigation("coordinaat")
                         .IsRequired();
+
+                    b.Navigation("gast");
                 });
 
             modelBuilder.Entity("Database.Onderhoud", b =>
@@ -306,12 +323,6 @@ namespace Opdracht4Database.Migrations
 
             modelBuilder.Entity("Database.Gast", b =>
                 {
-                    b.HasOne("Database.GastInfo", "gastInfo")
-                        .WithOne("gast")
-                        .HasForeignKey("Database.Gast", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Database.Gebruiker", null)
                         .WithOne()
                         .HasForeignKey("Database.Gast", "Id")
@@ -329,8 +340,6 @@ namespace Opdracht4Database.Migrations
                     b.Navigation("begeleidt");
 
                     b.Navigation("favoriet");
-
-                    b.Navigation("gastInfo");
                 });
 
             modelBuilder.Entity("Database.Medewerker", b =>
@@ -351,14 +360,11 @@ namespace Opdracht4Database.Migrations
                     b.Navigation("reserveringen");
                 });
 
-            modelBuilder.Entity("Database.GastInfo", b =>
-                {
-                    b.Navigation("gast")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Database.Gast", b =>
                 {
+                    b.Navigation("gastInfo")
+                        .IsRequired();
+
                     b.Navigation("reserveringen");
                 });
 #pragma warning restore 612, 618
