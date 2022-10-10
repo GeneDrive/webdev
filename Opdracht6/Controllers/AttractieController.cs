@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Opdracht6.Controllers
 {
@@ -51,6 +52,7 @@ namespace Opdracht6.Controllers
 
         // PUT: api/Attractie/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Medewerker")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAttractie(int id, Attractie attractie)
         {
@@ -82,6 +84,7 @@ namespace Opdracht6.Controllers
 
         // POST: api/Attractie
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Medewerker")]
         [HttpPost]
         public async Task<ActionResult<Attractie>> PostAttractie(Attractie attractie)
         {
@@ -96,6 +99,7 @@ namespace Opdracht6.Controllers
         }
 
         // DELETE: api/Attractie/5
+        [Authorize(Roles = "Medewerker")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAttractie(int id)
         {

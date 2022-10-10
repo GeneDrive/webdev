@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Opdracht6.Migrations
 {
-    public partial class _2 : Migration
+    public partial class MigrationNew : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,21 @@ namespace Opdracht6.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Attractie",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Naam = table.Column<string>(type: "TEXT", nullable: false),
+                    Engheid = table.Column<string>(type: "TEXT", nullable: false),
+                    Bouwjaar = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attractie", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,6 +223,9 @@ namespace Opdracht6.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Attractie");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -10472,5 +10472,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\github\\webdev\\Opdracht6\\obj\\project.nuget.cache : Het apparaat is niet klaar. : 'D:\\github\\webdev\\Opdracht6\\obj\\project.nuget.cache'"
+    }
+  ]
 }
