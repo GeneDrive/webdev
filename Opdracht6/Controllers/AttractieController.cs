@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Opdracht6.Controllers
 {
@@ -22,24 +23,31 @@ namespace Opdracht6.Controllers
 
         // GET: api/Attractie
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractie()
+        public async Task<ActionResult<IEnumerable<StripedAttractie>>> GetAttractie()
         {
-          if (_context.Attractie == null)
-          {
-            Console.WriteLine("oegaboega");
-              return NotFound();
-          }
-            return await _context.Attractie.ToListAsync();
+            if (_context.Attractie == null)
+            {
+                return NotFound();
+            }
+            var attracties = await _context.Attractie.ToListAsync();
+
+            List<StripedAttractie> attractiesToSend = new List<StripedAttractie>();
+            for (int i = 0; i < attracties.Count(); i++)
+            {
+                attractiesToSend.Add(new StripedAttractie{Id = attracties[i].Id, Naam = attracties[i].Naam, Engheid = attracties[i].Engheid, Bouwjaar = attracties[i].Bouwjaar, AantalLikes = attracties[i].aantalLikes});
+            }
+
+            return attractiesToSend;
         }
 
         // GET: api/Attractie/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Attractie>> GetAttractie(int id)
+        public async Task<ActionResult<StripedAttractie>> GetAttractie(int id)
         {
-          if (_context.Attractie == null)
-          {
-              return NotFound();
-          }
+            if (_context.Attractie == null)
+            {
+                return NotFound();
+            }
             var attractie = await _context.Attractie.FindAsync(id);
 
             if (attractie == null)
@@ -47,7 +55,29 @@ namespace Opdracht6.Controllers
                 return NotFound();
             }
 
-            return attractie;
+            var attractieToSend = new StripedAttractie{Id = attractie.Id, Naam = attractie.Naam, Engheid = attractie.Engheid, Bouwjaar = attractie.Bouwjaar, AantalLikes = attractie.aantalLikes};
+
+            return attractieToSend;
+        }
+
+        // GET: api/Attractie/ByYear
+        [HttpGet]
+        [Route("ByYear")]
+        public async Task<ActionResult<IEnumerable<StripedAttractie>>> OrderAttractieByYear()
+        {
+            if (_context.Attractie == null)
+            {
+                return NotFound();
+            }
+            var attracties = await _context.Attractie.OrderBy(at => at.Bouwjaar).ToListAsync();
+            
+            List<StripedAttractie> attractiesToSend = new List<StripedAttractie>();
+            for (int i = 0; i < attracties.Count(); i++)
+            {
+                attractiesToSend.Add(new StripedAttractie{Id = attracties[i].Id, Naam = attracties[i].Naam, Engheid = attracties[i].Engheid, Bouwjaar = attracties[i].Bouwjaar, AantalLikes = attracties[i].aantalLikes});
+            }
+
+            return attractiesToSend;
         }
 
         // PUT: api/Attractie/5
@@ -62,7 +92,7 @@ namespace Opdracht6.Controllers
             }
 
             _context.Entry(attractie).State = EntityState.Modified;
-
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -119,9 +149,72 @@ namespace Opdracht6.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Gast")]
+        [HttpPost("{id}")]
+        [Route("Like")]
+        public async Task<IActionResult> LikeAttractie(int id)
+        {
+            if (_context.Attractie == null)
+            {
+                return NotFound();
+            }
+
+            var attractie = await _context.Attractie.FindAsync(id);
+
+      	    if (attractie == null)
+            {
+                return NotFound();
+            }
+
+            Request.Headers.TryGetValue("Authorization", out var headervalue);
+            string cleanToken = headervalue.ToString().Substring(7);
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(cleanToken);
+            var tokenS = jsonToken as JwtSecurityToken;
+            string[] loggedInUserDisgusting = tokenS.Claims.ToList()[0].ToString().Split(": ");
+            string loggedInUser = loggedInUserDisgusting[1];
+            
+            // moet op een of ander manier bij de gebruiker tabel komen en er een op naam uithalen
+            var user = _context.Gebruiker.FirstAsync
+
+            if(attractie.gebruikerLikes.Count() != null)
+            {
+                for (int i = 0; i < attractie.gebruikerLikes.Count(); i++)
+                {
+                    if(attractie.gebruikerLikes[i].UserName == loggedInUser)
+                    {
+                        return BadRequest();
+                    }
+                }
+            }
+                
+            attractie.gebruikerLikes.Add()
+
+            _context.Entry(attractie).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AttractieExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(201);
+        }
+
         private bool AttractieExists(int id)
         {
             return (_context.Attractie?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }

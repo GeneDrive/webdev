@@ -28,6 +28,9 @@ namespace Opdracht6.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: true),
+                    Geslacht = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -169,6 +172,30 @@ namespace Opdracht6.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AttractieGebruiker",
+                columns: table => new
+                {
+                    gebruikerLikesId = table.Column<string>(type: "TEXT", nullable: false),
+                    geliketeAttractiesId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AttractieGebruiker", x => new { x.gebruikerLikesId, x.geliketeAttractiesId });
+                    table.ForeignKey(
+                        name: "FK_AttractieGebruiker_AspNetUsers_gebruikerLikesId",
+                        column: x => x.gebruikerLikesId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AttractieGebruiker_Attractie_geliketeAttractiesId",
+                        column: x => x.geliketeAttractiesId,
+                        principalTable: "Attractie",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -205,6 +232,11 @@ namespace Opdracht6.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AttractieGebruiker_geliketeAttractiesId",
+                table: "AttractieGebruiker",
+                column: "geliketeAttractiesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -225,13 +257,16 @@ namespace Opdracht6.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Attractie");
+                name: "AttractieGebruiker");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Attractie");
         }
     }
 }

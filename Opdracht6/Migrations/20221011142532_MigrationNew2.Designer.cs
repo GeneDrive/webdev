@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Opdracht6.Migrations
 {
     [DbContext(typeof(PretparkContext))]
-    [Migration("20221010144832_MigrationNew")]
-    partial class MigrationNew
+    [Migration("20221011142532_MigrationNew2")]
+    partial class MigrationNew2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,21 @@ namespace Opdracht6.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Attractie");
+                });
+
+            modelBuilder.Entity("AttractieGebruiker", b =>
+                {
+                    b.Property<string>("gebruikerLikesId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("geliketeAttractiesId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("gebruikerLikesId", "geliketeAttractiesId");
+
+                    b.HasIndex("geliketeAttractiesId");
+
+                    b.ToTable("AttractieGebruiker");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -101,6 +116,10 @@ namespace Opdracht6.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -151,6 +170,8 @@ namespace Opdracht6.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -230,6 +251,35 @@ namespace Opdracht6.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Gebruiker", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Geslacht")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.HasDiscriminator().HasValue("Gebruiker");
+                });
+
+            modelBuilder.Entity("AttractieGebruiker", b =>
+                {
+                    b.HasOne("Gebruiker", null)
+                        .WithMany()
+                        .HasForeignKey("gebruikerLikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Attractie", null)
+                        .WithMany()
+                        .HasForeignKey("geliketeAttractiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

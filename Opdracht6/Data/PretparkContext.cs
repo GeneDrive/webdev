@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-    public class PretparkContext : IdentityDbContext
+public class PretparkContext : IdentityDbContext
+{
+    public PretparkContext (DbContextOptions<PretparkContext> options)
+        : base(options)
     {
-        public PretparkContext (DbContextOptions<PretparkContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<Attractie> Attractie { get; set; } = default!;
     }
+
+    public DbSet<Attractie> Attractie { get; set; } = default!;
+    public DbSet<Gebruiker> Gebruiker { get; set; } = default!;
+}

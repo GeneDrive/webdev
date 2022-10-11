@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 
 public class GebruikerLogin
 {
@@ -14,11 +15,11 @@ public class GebruikerLogin
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<Gebruiker> _userManager;
+    private readonly SignInManager<Gebruiker> _signInManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+    public AccountController(UserManager<Gebruiker> userManager, SignInManager<Gebruiker> signInManager, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -30,7 +31,6 @@ public class AccountController : ControllerBase
     public async Task<ActionResult<IEnumerable<Attractie>>> RegistreerGast([FromBody] Gebruiker gebruikerMetWachwoord)
     {
         var resultaat1 = await _userManager.CreateAsync(gebruikerMetWachwoord, gebruikerMetWachwoord.Password);
-
         if(!resultaat1.Succeeded)
         {
             return new BadRequestObjectResult(resultaat1);
@@ -100,12 +100,14 @@ public class AccountController : ControllerBase
                     expires: DateTime.Now.AddMinutes(10),
                     signingCredentials: signingCredentials
                 );
+                
                 return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenOptions) });
             }
 
         return Unauthorized();
     }
 
+    [Authorize(Roles = "Medewerker")]
     [HttpPost]
     [Route("addRole")]
     public async Task<ActionResult<IEnumerable<Attractie>>> AddRole([FromBody] IdentityRole role)
@@ -120,4 +122,6 @@ public class AccountController : ControllerBase
         return StatusCode(403);
        
     }
+
+    
 }
