@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Opdracht6.Migrations
 {
-    public partial class MigrationNew : Migration
+    public partial class MigrationNew1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,8 @@ namespace Opdracht6.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Naam = table.Column<string>(type: "TEXT", nullable: false),
                     Engheid = table.Column<string>(type: "TEXT", nullable: false),
-                    Bouwjaar = table.Column<int>(type: "INTEGER", nullable: false)
+                    Bouwjaar = table.Column<int>(type: "INTEGER", nullable: false),
+                    aantalLikes = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -173,24 +174,24 @@ namespace Opdracht6.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AttractieGebruiker",
+                name: "gb_at-Likes",
                 columns: table => new
                 {
                     gebruikerLikesId = table.Column<string>(type: "TEXT", nullable: false),
-                    geliketeAttractiesId = table.Column<int>(type: "INTEGER", nullable: false)
+                    gelikedeAttractiesId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AttractieGebruiker", x => new { x.gebruikerLikesId, x.geliketeAttractiesId });
+                    table.PrimaryKey("PK_gb_at-Likes", x => new { x.gebruikerLikesId, x.gelikedeAttractiesId });
                     table.ForeignKey(
-                        name: "FK_AttractieGebruiker_AspNetUsers_gebruikerLikesId",
+                        name: "FK_gb_at-Likes_AspNetUsers_gebruikerLikesId",
                         column: x => x.gebruikerLikesId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AttractieGebruiker_Attractie_geliketeAttractiesId",
-                        column: x => x.geliketeAttractiesId,
+                        name: "FK_gb_at-Likes_Attractie_gelikedeAttractiesId",
+                        column: x => x.gelikedeAttractiesId,
                         principalTable: "Attractie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -234,9 +235,9 @@ namespace Opdracht6.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttractieGebruiker_geliketeAttractiesId",
-                table: "AttractieGebruiker",
-                column: "geliketeAttractiesId");
+                name: "IX_gb_at-Likes_gelikedeAttractiesId",
+                table: "gb_at-Likes",
+                column: "gelikedeAttractiesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -257,7 +258,7 @@ namespace Opdracht6.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AttractieGebruiker");
+                name: "gb_at-Likes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

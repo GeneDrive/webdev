@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Opdracht6.Migrations
 {
     [DbContext(typeof(PretparkContext))]
-    [Migration("20221011142730_MigrationNew3")]
-    partial class MigrationNew3
+    [Migration("20221012130143_MigrationNew1")]
+    partial class MigrationNew1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,24 +35,27 @@ namespace Opdracht6.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("aantalLikes")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Attractie");
                 });
 
-            modelBuilder.Entity("AttractieGebruiker", b =>
+            modelBuilder.Entity("gb_at-Likes", b =>
                 {
                     b.Property<string>("gebruikerLikesId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("geliketeAttractiesId")
+                    b.Property<int>("gelikedeAttractiesId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("gebruikerLikesId", "geliketeAttractiesId");
+                    b.HasKey("gebruikerLikesId", "gelikedeAttractiesId");
 
-                    b.HasIndex("geliketeAttractiesId");
+                    b.HasIndex("gelikedeAttractiesId");
 
-                    b.ToTable("AttractieGebruiker");
+                    b.ToTable("gb_at-Likes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -267,7 +270,7 @@ namespace Opdracht6.Migrations
                     b.HasDiscriminator().HasValue("Gebruiker");
                 });
 
-            modelBuilder.Entity("AttractieGebruiker", b =>
+            modelBuilder.Entity("gb_at-Likes", b =>
                 {
                     b.HasOne("Gebruiker", null)
                         .WithMany()
@@ -277,7 +280,7 @@ namespace Opdracht6.Migrations
 
                     b.HasOne("Attractie", null)
                         .WithMany()
-                        .HasForeignKey("geliketeAttractiesId")
+                        .HasForeignKey("gelikedeAttractiesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

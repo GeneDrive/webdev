@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Opdracht6.Migrations
 {
     [DbContext(typeof(PretparkContext))]
-    [Migration("20221011150640_MigrationNew6")]
-    partial class MigrationNew6
+    [Migration("20221012134015_MigrationNew3")]
+    partial class MigrationNew3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,19 +43,19 @@ namespace Opdracht6.Migrations
                     b.ToTable("Attractie");
                 });
 
-            modelBuilder.Entity("AttractieGebruiker", b =>
+            modelBuilder.Entity("gb_at-Likes", b =>
                 {
                     b.Property<string>("gebruikerLikesId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("geliketeAttractiesId")
+                    b.Property<int>("gelikedeAttractiesId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("gebruikerLikesId", "geliketeAttractiesId");
+                    b.HasKey("gebruikerLikesId", "gelikedeAttractiesId");
 
-                    b.HasIndex("geliketeAttractiesId");
+                    b.HasIndex("gelikedeAttractiesId");
 
-                    b.ToTable("AttractieGebruiker");
+                    b.ToTable("gb_at-Likes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -270,7 +270,7 @@ namespace Opdracht6.Migrations
                     b.HasDiscriminator().HasValue("Gebruiker");
                 });
 
-            modelBuilder.Entity("AttractieGebruiker", b =>
+            modelBuilder.Entity("gb_at-Likes", b =>
                 {
                     b.HasOne("Gebruiker", null)
                         .WithMany()
@@ -280,7 +280,7 @@ namespace Opdracht6.Migrations
 
                     b.HasOne("Attractie", null)
                         .WithMany()
-                        .HasForeignKey("geliketeAttractiesId")
+                        .HasForeignKey("gelikedeAttractiesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

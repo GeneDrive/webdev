@@ -1,0 +1,482 @@
+{
+	"info": {
+		"_postman_id": "c3b9b713-35f3-432d-907a-cabe6cbc7d71",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12694170"
+	},
+	"item": [
+		{
+			"name": "AddRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Gast\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7131/api/Account/addRole",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Account",
+						"addRole"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registreer_Gast",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserName\": \"Gast1\",\r\n    \"Password\": \"Welkom01!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7131/api/Account/Registreer_Gast",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Account",
+						"Registreer_Gast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registreer_MW",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserName\": \"Medewerker1\",\r\n    \"Password\": \"Welkom01!\",\r\n    \"Geslacht\": \"Vrouw\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7131/api/Account/Registreer_Medewerker",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Account",
+						"Registreer_Medewerker"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login_MW",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserName\": \"Medewerker1\",\r\n    \"Password\": \"Welkom01!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7131/api/Account/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Gast",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserName\": \"Gast1\",\r\n    \"Password\": \"Welkom01!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7131/api/Account/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attractie_ByYear",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWVkZXdlcmtlcjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNZWRld2Vya2VyIiwiZXhwIjoxNjY1NTA4NzgwLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTMxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzMSJ9.vZhrL-I3MjgXSp0Bnhg4DyFyGELzQtjSMB-0BRJ7Msw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/Get/ByYear",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"Get",
+						"ByYear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attractie_ByYear_MW",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWVkZXdlcmtlcjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNZWRld2Vya2VyIiwiZXhwIjoxNjY1NTA4NzgwLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTMxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzMSJ9.vZhrL-I3MjgXSp0Bnhg4DyFyGELzQtjSMB-0BRJ7Msw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/Get/ByYear",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"Get",
+						"ByYear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Attracties_GAst",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiR2FzdDIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1NTg1OTYwLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTMxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzMSJ9.dYkdJceh7dMHCmEsZu8N1J0VhfWySxOWz3KIHEDcURg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/Get",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"Get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Attracties_MW",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": ".OrderBy(at => at.Bouwjaar)",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/GetMW",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"GetMW"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attractie_By_ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiR2FzdDIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1NTg2NjI3LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTMxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzMSJ9.gfFaRbDw0MR50K7Wepj_m4W0SAG2a6wVit8LFApGoTU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/Get/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"Get",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attractie_By_ID_MW",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/GetMW/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"GetMW",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit_Attractie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWVkZXdlcmtlcjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNZWRld2Vya2VyIiwiZXhwIjoxNjY1NDk0ODk0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTMxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzMSJ9.EKPbyEQ9BfbaPEOTt36q04BoiPJPzfIKtXF_vRPKaQo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Naam\": \"Python\",\r\n    \"Engheid\": \"Heel Eng\",\r\n    \"Bouwjaar\": \"2017\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nieuwe_Attractie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWVkZXdlcmtlcjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNZWRld2Vya2VyIiwiZXhwIjoxNjY1NTgwNDMxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTMxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzMSJ9.GlnTDqNxy0dgsNTNdYr_8vJiO7NM9gpPaipUr4O8-eM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Naam\": \"python\",\r\n    \"Engheid\": \"Saai\",\r\n    \"Bouwjaar\": \"2018\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove_Attractie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWVkZXdlcmtlcjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNZWRld2Vya2VyIiwiZXhwIjoxNjY1NDk0ODk0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTMxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzMSJ9.EKPbyEQ9BfbaPEOTt36q04BoiPJPzfIKtXF_vRPKaQo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiR2FzdDIiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHYXN0IiwiZXhwIjoxNjY1NTg2NjI3LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTMxIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEzMSJ9.gfFaRbDw0MR50K7Wepj_m4W0SAG2a6wVit8LFApGoTU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7131/api/Attractie/Like/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7131",
+					"path": [
+						"api",
+						"Attractie",
+						"Like",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

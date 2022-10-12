@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
 
 namespace Opdracht6.Controllers
 {
@@ -15,21 +16,25 @@ namespace Opdracht6.Controllers
     public class AttractieController : ControllerBase
     {
         private readonly PretparkContext _context;
+        private readonly UserManager<Gebruiker> _userManager;
 
-        public AttractieController(PretparkContext context)
+        public AttractieController(UserManager<Gebruiker> userManager, PretparkContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
-        // GET: api/Attractie
+        // GET: api/Attractie/Get
         [HttpGet]
+        [Authorize(Roles = "Gast")]
+        [Route("Get")]
         public async Task<ActionResult<IEnumerable<StripedAttractie>>> GetAttractie()
         {
             if (_context.Attractie == null)
             {
                 return NotFound();
             }
-            var attracties = await _context.Attractie.ToListAsync();
+            var attracties = await Task.Run(() => _context.Attractie.Include(at => at.gebruikerLikes).ToListAsync());
 
             List<StripedAttractie> attractiesToSend = new List<StripedAttractie>();
             for (int i = 0; i < attracties.Count(); i++)
@@ -40,15 +45,17 @@ namespace Opdracht6.Controllers
             return attractiesToSend;
         }
 
-        // GET: api/Attractie/5
-        [HttpGet("{id}")]
+        // GET: api/Attractie/Get/5
+        [HttpGet("Get/{id}")]
+        [Authorize(Roles = "Gast")]
         public async Task<ActionResult<StripedAttractie>> GetAttractie(int id)
         {
             if (_context.Attractie == null)
             {
                 return NotFound();
             }
-            var attractie = await _context.Attractie.FindAsync(id);
+            var attracties = await Task.Run(() => _context.Attractie.Include(at => at.gebruikerLikes).ToListAsync());
+            var attractie = attracties.Where(at => at.Id == id).FirstOrDefault();
 
             if (attractie == null)
             {
@@ -56,20 +63,21 @@ namespace Opdracht6.Controllers
             }
 
             var attractieToSend = new StripedAttractie{Id = attractie.Id, Naam = attractie.Naam, Engheid = attractie.Engheid, Bouwjaar = attractie.Bouwjaar, AantalLikes = attractie.aantalLikes};
-
             return attractieToSend;
         }
 
-        // GET: api/Attractie/ByYear
+        // GET: api/Attractie/Get/ByYear
         [HttpGet]
-        [Route("ByYear")]
+        [Route("Get/ByYear")]
+        [Authorize(Roles = "Gast")]
         public async Task<ActionResult<IEnumerable<StripedAttractie>>> OrderAttractieByYear()
         {
             if (_context.Attractie == null)
             {
                 return NotFound();
             }
-            var attracties = await _context.Attractie.OrderBy(at => at.Bouwjaar).ToListAsync();
+
+            var attracties = await Task.Run(() => _context.Attractie.Include(at => at.gebruikerLikes).OrderBy(at => at.Bouwjaar).ToListAsync());
             
             List<StripedAttractie> attractiesToSend = new List<StripedAttractie>();
             for (int i = 0; i < attracties.Count(); i++)
@@ -78,6 +86,57 @@ namespace Opdracht6.Controllers
             }
 
             return attractiesToSend;
+        }
+
+        // GET: api/Attractie/GetMW
+        [HttpGet]
+        [Authorize(Roles = "Medewerker")]
+        [Route("GetMW")]
+        public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractieMW()
+        {
+            if (_context.Attractie == null)
+            {
+                return NotFound();
+            }
+            var attracties = await Task.Run(() => _context.Attractie.Include(at => at.gebruikerLikes).ToListAsync());
+
+            return attracties;
+        }
+
+        // GET: api/Attractie/GetMW/5
+        [HttpGet("GetMW/{id}")]
+        [Authorize(Roles = "Medewerker")]
+        public async Task<ActionResult<Attractie>> GetAttractieMW(int id)
+        {
+            if (_context.Attractie == null)
+            {
+                return NotFound();
+            }
+            var attracties = await Task.Run(() => _context.Attractie.Include(at => at.gebruikerLikes).ToListAsync());
+            var attractie = attracties.Where(at => at.Id == id).FirstOrDefault();
+
+            if (attractie == null)
+            {
+                return NotFound();
+            }
+
+            return attractie;
+        }
+
+        // GET: api/Attractie/GetMW/ByYear
+        [HttpGet]
+        [Route("GetMW/ByYear")]
+        [Authorize(Roles = "Medewerker")]
+        public async Task<ActionResult<IEnumerable<Attractie>>> OrderAttractieByYearMW()
+        {
+            if (_context.Attractie == null)
+            {
+                return NotFound();
+            }
+
+            var attracties = await Task.Run(() => _context.Attractie.Include(at => at.gebruikerLikes).OrderBy(at => at.Bouwjaar).ToListAsync());
+
+            return attracties;
         }
 
         // PUT: api/Attractie/5
@@ -150,8 +209,7 @@ namespace Opdracht6.Controllers
         }
 
         [Authorize(Roles = "Gast")]
-        [HttpPost("{id}")]
-        [Route("Like")]
+        [HttpPut("Like/{id}")]
         public async Task<IActionResult> LikeAttractie(int id)
         {
             if (_context.Attractie == null)
@@ -159,25 +217,27 @@ namespace Opdracht6.Controllers
                 return NotFound();
             }
 
-            var attractie = await _context.Attractie.FindAsync(id);
+            var attracties = await Task.Run(() => _context.Attractie.Include(at => at.gebruikerLikes).ToListAsync());
+            var attractie = attracties.Where(at => at.Id == id).FirstOrDefault();
+           
+            Console.WriteLine(attractie.Naam);
 
+            Console.WriteLine("hallo: " + id);
       	    if (attractie == null)
             {
                 return NotFound();
             }
 
-            Request.Headers.TryGetValue("Authorization", out var headervalue);
-            string cleanToken = headervalue.ToString().Substring(7);
-            var handler = new JwtSecurityTokenHandler();
-            var jsonToken = handler.ReadToken(cleanToken);
-            var tokenS = jsonToken as JwtSecurityToken;
-            string[] loggedInUserDisgusting = tokenS.Claims.ToList()[0].ToString().Split(": ");
-            string loggedInUser = loggedInUserDisgusting[1];
-            
-            // moet op een of ander manier bij de gebruiker tabel komen en er een op naam uithalen
-            var user = _context.Gebruiker.FirstAsync
+            string loggedInUser = getValueFromHeader(0);
 
-            if(attractie.gebruikerLikes.Count() != null)
+            var user = await _userManager.FindByNameAsync(loggedInUser);
+            var realUser = await _context.Gebruiker.FindAsync(user.Id);
+            if(realUser == null)
+            {
+                return BadRequest();
+            }
+
+            if(attractie.gebruikerLikes != null && attractie.gebruikerLikes.Count() != 0)
             {
                 for (int i = 0; i < attractie.gebruikerLikes.Count(); i++)
                 {
@@ -187,9 +247,11 @@ namespace Opdracht6.Controllers
                     }
                 }
             }
-                
-            attractie.gebruikerLikes.Add()
+            
+            realUser.gelikedeAttracties.Add(attractie);
+            attractie.gebruikerLikes.Add(realUser);
 
+            _context.Entry(realUser).State = EntityState.Modified;
             _context.Entry(attractie).State = EntityState.Modified;
 
             try
@@ -216,5 +278,16 @@ namespace Opdracht6.Controllers
             return (_context.Attractie?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
+        public string getValueFromHeader(int property) 
+        {
+            Request.Headers.TryGetValue("Authorization", out var headervalue);
+            string cleanToken = headervalue.ToString().Substring(7);
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(cleanToken);
+            var tokenS = jsonToken as JwtSecurityToken;
+            string[] loggedInUserDisgusting = tokenS.Claims.ToList()[property].ToString().Split(": ");
+            string loggedInUser = loggedInUserDisgusting[1];
+            return loggedInUser;
+        }
     }
 }
