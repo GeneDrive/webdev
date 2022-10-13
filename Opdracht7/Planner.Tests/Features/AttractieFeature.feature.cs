@@ -146,16 +146,16 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="GastBestaatNietBijAanpassen")]
+        [Xunit.SkippableFactAttribute(DisplayName="GastBestaatNietBijOpvraag")]
         [Xunit.TraitAttribute("FeatureTitle", "Attractie")]
-        [Xunit.TraitAttribute("Description", "GastBestaatNietBijAanpassen")]
+        [Xunit.TraitAttribute("Description", "GastBestaatNietBijOpvraag")]
         [Xunit.TraitAttribute("Category", "myTagw")]
-        public void GastBestaatNietBijAanpassen()
+        public void GastBestaatNietBijOpvraag()
         {
             string[] tagsOfScenario = new string[] {
                     "myTagw"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GastBestaatNietBijAanpassen", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GastBestaatNietBijOpvraag", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

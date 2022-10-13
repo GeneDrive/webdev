@@ -14,7 +14,7 @@ Scenario: BestaatNietBijVerwijder
     Then moet er een error 404 komen
 
 @myTagw
-Scenario: GastBestaatNietBijAanpassen
+Scenario: GastBestaatNietBijOpvraag
     Given attractie Python bestaat niet
     When attractie Python wordt opgevraagd
     Then moet er een error 404 komen
