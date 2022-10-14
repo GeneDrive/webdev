@@ -3,17 +3,7 @@ namespace Database;
 
 public class DatabaseContext : DbContext
 {
-    public async Task<bool> boek(Gast g, Attractie a, DateTimeBereik d)
-    {
-        if(await a.vrij(this, d))
-        {
-            g.credits--;
-        }
-
-        // Temp
-        return true;
-    }
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlServer("Data Source=BEEST\\SQLEXPRESS;Initial Catalog=YourDatabase;Trusted_Connection=True;").EnableSensitiveDataLogging(true);
     public DbSet<Gebruiker> Gebruikers { get; set; }
     public DbSet<Medewerker> Medewerkers { get; set; }
@@ -21,6 +11,51 @@ public class DatabaseContext : DbContext
     public DbSet<Gast> Gasten { get; set; }
     public DbSet<Attractie> Attracties { get; set; }
     public DbSet<Reservering> Reserveringen { get; set; }
+    
+
+    public async Task<bool> boek(Gast g, Attractie a, DateTimeBereik d)
+    {
+        bool succes = false;
+
+        if(await a.vrij(this, d))
+        {
+            await a.Semaphore.WaitAsync();
+            try 
+            { 
+                var transaction = this.Database.BeginTransaction();
+                try
+                {
+                    transaction.CreateSavepoint("BeforeChanges");
+
+                    await this.Reserveringen.AddAsync(new Reservering{ gast = g, dateTimeBereik = d, attractie = a});
+                    await this.SaveChangesAsync(); 
+
+                    g.credits--;
+                    var gastToUpdate = await Task.Run(() => this.Gasten.Where(ga => ga.Id == g.Id));
+                    
+                    if(gastToUpdate != null)
+                    {
+                        this.Entry(gastToUpdate).CurrentValues.SetValues(g);
+                    }
+                    await this.SaveChangesAsync();
+
+                    transaction.Commit();
+                    succes = true;
+                }
+                catch (Exception e)
+                {
+                    transaction.RollbackToSavepoint("BeforeChanges");
+                    Console.WriteLine("{0} Exception caught.", e);
+                    succes = false;
+                }
+            }
+            finally 
+            { 
+                a.Semaphore.Release();
+            }
+        }
+        return succes;
+    }
 
 
 

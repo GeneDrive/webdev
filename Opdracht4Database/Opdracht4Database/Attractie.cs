@@ -6,6 +6,7 @@ public class Attractie
     // properties
     public int Id { get; set; }
     public string naam { get; set; }
+    public readonly SemaphoreSlim Semaphore = new SemaphoreSlim(1, 1);
 
     protected Attractie() { naam = null!; }
     public Attractie(string _naam)
@@ -31,8 +32,6 @@ public class Attractie
 
         return false;
     }
-
-    public readonly SemaphoreSlim Semaphore = new SemaphoreSlim(1, 1);
 
     // relationships
     public List<Reservering> reserveringen { get; set; }
