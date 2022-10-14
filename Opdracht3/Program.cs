@@ -64,18 +64,7 @@ namespace AsyncBoekOpdracht
             Console.WriteLine("Waar gaat het boek over?");
             var beschrijving = Console.ReadLine();
             Boek beste = null;
-            //////////////////////////////////////////////////////////////////
-            //
-            //
-            //
-            //
-            //
-            //ik weet niet hoe ik dit moet vesnellen, want threading uit de les werkt niet
-            //
-            //
-            //
-            //
-            //////////////////////////////////////////////////////////////////
+            
             foreach (var boek in await Database.HaalLijstOp())
                 if (beste == null || boek.AIScore > beste.AIScore)
                     beste = boek;
